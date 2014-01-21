@@ -9,8 +9,10 @@
 
 </head>
 <body>
+	
+	<?php require 'navigation.php'; ?>
 
-	<h1><?php foreach(getCurrentUser() as $user){print $user['username'];} ?></h1>
+	<h1><?php foreach(getCurrentUser() as $user){print $user['username'];} print_r($_SESSION);?></h1>
 
 	<form action="content.php" method="POST">
 		<textarea name="content" cols="30" rows="5"></textarea><br>
@@ -32,16 +34,14 @@
 				$replyId  = $post['post_id']; 
 				$username = $post['username'];
 
-				if($post['answer_to_name'] != '') 
-					$answerToNames =  '@' . $post['answer_to_name'];	
-				else
-					$answerToNames = '';	
+				$answerToNames = $post['answer_to_name'];
 
 				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
-				print $answerToNames . ' ' . $post['content'] . '<br><br>';
-
-/*				print '<pre>';
-				print_r($post);*/
+				if($answerToNames != '') {
+					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . $post['content'] . '<br><br>';
+				} else {
+					print $post['content'] . '<br><br>';
+				}
 				
 				foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
 				<div class="reply_post">
@@ -55,11 +55,8 @@
 
 						if($replyPost['answer_to_id'] != 0) {	
 							print  $replyPost['username'] . '<br>';
-							print  '@' . $answerToName . ': ' . $replyPost['content'];
-
-
-				/*		print '<pre>';
-						print_r($replyPost); */							
+							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . $replyPost['content'];
+				
 
 					?>
 					
