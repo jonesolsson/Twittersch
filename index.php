@@ -1,4 +1,4 @@
-<?php ob_start(); ?>
+<?php require 'functions/login.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +8,6 @@
 
 </head>
 <body>
-
-<?php require 'functions/login.php'; ?>
 
 <form action="index.php" method="POST">
 	<input type="text" name="user" placeholder="E-post"><br>

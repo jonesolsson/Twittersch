@@ -1,4 +1,4 @@
-<?php ob_start();	
+<?php
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -54,9 +54,10 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 
 			session_start();
 
-			$_SESSION['user'] = $user;
-			$_SESSION['id']   = $currentUser['id'];
-
+			$_SESSION['login']   = true;
+			$_SESSION['user']    = $user;
+			$_SESSION['user_id'] = $currentUser['id'];
+			
 			header('Location: content.php');
 			
 		} else {

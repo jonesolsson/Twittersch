@@ -1,30 +1,22 @@
-<?php require 'functions/functions.php'; ?>
+<?php 
+//require 'functions/profile_functions.php'; 
+ require 'functions/functions.php';
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
 
 	<title>Twittersch</title>
-
-	<style>.reply_post{margin-left: 30px;}</style>
+	<style>.reply_post{color: red;}</style>
 
 </head>
 <body>
-
-	<h1><?php foreach(getCurrentUser() as $user){print $user['username'];} ?></h1>
-
-	<form action="content.php" method="POST">
-		<textarea name="content" cols="30" rows="5"></textarea><br>
-		<input type="submit" value="post">
-	</form>
-	<div class="errors">
-		<?php
-			foreach($errors as $error) {
-				print $error;
-			}
-		?>
-	</div><br><br>
+	
+ 	<a href="content.php">content</a>
+	<h1><?= $_GET['user']; ?></h1>
+	
 	<div class="posts">
-		<?php $posts = getPostsFromDB(); foreach ($posts as $post) : ?>
+		<?php $posts = getPostsToProfile(); foreach ($posts as $post) : ?>
 		<div class="post">
 			
 			<?php
@@ -53,13 +45,11 @@
 						$replyName 	  = $replyPost['username'];
 						$answerToName = $replyPost['answer_to_name'];
 
-						if($replyPost['answer_to_id'] != 0) {	
-							print  $replyPost['username'] . '<br>';
-							print  '@' . $answerToName . ': ' . $replyPost['content'];
+						print  $replyPost['username'] . '<br>';
+						print  '@' . $answerToName . ': ' . $replyPost['content'];
 
-
-				/*		print '<pre>';
-						print_r($replyPost); */							
+						/*print '<pre>';
+						print_r($replyPost); */								
 
 					?>
 					
@@ -70,13 +60,12 @@
 						<input type="hidden" name="reply_id" value="<?= $replyToId ?>">
 						<input type="submit" value="reply">
 					</form><br>	
-
 				</div>
-				<?php } endforeach; ?>
 
-			<form action="content.php" method="POST">
+				<?php endforeach; ?>
+				
+			<form action="profile.php?user=<?= $username ?>" method="POST">
 				<input type="text" name="reply">
-				<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
 				<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 				<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 				<input type="submit" value="reply">
