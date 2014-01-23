@@ -164,7 +164,7 @@ if(isset($_POST['content'])) {
 
 	if(count($errors) == 0) {
 
-		writePostToDB($userId, $content); 
+		writePostToDB($userId, sanitize($content)); 
 
 	}		
 
@@ -300,8 +300,118 @@ if (isset($_POST['update_username'])) {
 
 		} 
 	}
+}
 
+//Bilduppladdning
+function PostImgUrlToDB($url, $userId) {
 
+	$link = connection();
+
+	$query = "INSERT INTO images (url, user_id) VALUES ('$url', '$userId')";
+
+	$result = mysqli_query($link, $query);
+
+}
+
+function UpdateImgUrlToDB($url, $userId) {
+
+	$link = connection();
+
+	$query = "UPDATE images SET url='$url' WHERE user_id='$userId'";
+
+	$result = mysqli_query($link, $query);
+
+}
+
+function getProfileImg($username) {
+
+	$link = connection();
+
+	$query = "SELECT * FROM images INNER JOIN users ON images.user_id = users.id
+	          WHERE users.username='$username'";
+
+	$result = mysqli_query($link, $query);
+
+	$img = [];
+
+	while($row = mysqli_fetch_assoc($result)) {
+		$img[] = $row;
+	}
+
+	return $img;
+
+}
+
+ $error = '';	
+
+ //Uppladdning av bilder
+ if(isset($_FILES['upload'])) {
+
+ 	if($_FILES['upload']['error'] == 0) {
+
+ 		$tmp  = $_FILES['upload']['tmp_name'];
+ 		$name = $_FILES['upload']['name'];
+ 		$size = $_FILES['upload']['size'];
+
+ 		if($size < 1024 * 1024) {
+
+ 			if(@getimagesize($tmp) !== false) { 
+
+ 				if( ! is_dir("uploads/$currentUsername")) {
+
+ 					PostImgUrlToDB("uploads/$currentUsername/$name", $id);
+ 					mkdir("uploads/$currentUsername");
+ 					move_uploaded_file($tmp, "uploads/$currentUsername/$name");	
+
+ 				} else {
+
+ 					UpdateImgUrlToDB("uploads/$currentUsername/$name", $id);
+ 					move_uploaded_file($tmp, "uploads/$currentUsername/$name");
+
+ 				}  				
+
+ 			} else {
+
+ 				$error = 'Filen måste vara en bild!';
+
+ 			}
+
+ 		} else {
+
+ 			$error = 'Filen är för stor!';
+
+ 		} 			
+
+ 	} else {
+
+ 		$error = 'Uppladdningen misslyckades';
+
+ 	}
+
+ }
+
+//Leta efter länkar i inlägg
+function linkToAnchor($text) {
+    // The Regular Expression filter
+    $reg_exUrl = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";   	 
+
+    // Check if there is a url in the text
+    if(preg_match_all($reg_exUrl, $text, $url)) {
+        // make the urls hyper links
+        $matches = array_unique($url[0]);
+        foreach($matches as $match) {
+            $replacement = "<a href=".$match.">{$match}</a>";
+            $text = str_replace($match,$replacement,$text);
+        }
+         
+        return nl2br($text);
+       
+     } else {
+
+        // if no urls in the text just return the text
+        return nl2br($text);
+
+    }
 }
 
 //Paging
@@ -337,12 +447,11 @@ function countUsersPosts($user) {
 //Kolla om man bifinner sig på "content" eller "profile"
 if( ! empty($_GET['user'])) {
 	$numRows = countUsersPosts($_GET['user']);
-	print $_GET['user'];  
+	//print $_GET['user'];  
 } else {
 	$numRows = countAllPosts();
 }
 
-print $numRows;
 $view    = 3;
 $pages	 = ceil($numRows / $view);
 $start	 = 1;
@@ -372,6 +481,10 @@ function printPageLinks($pages, $start, $username) {
 		}	
 	}
 }
+
+
+
+
 	
 
 

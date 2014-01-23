@@ -6,7 +6,7 @@
 <head>
 
 	<title>Twittersch</title>
-	<style>.reply_post{margin-left: 30px;}</style>
+	<style>.reply_post{margin-left: 30px;} .profile-pic img {width: 200px;}</style>
 
 </head>
 <body>
@@ -16,7 +16,20 @@
  			require 'navigation.php';				
  		}  
  	?>	
+	
+	<div class="profile-pic">
+		<?php
 
+			 foreach(getProfileImg($_GET['user']) as $user) {
+
+			 	$path = $user['url'];
+
+			 }
+		?>
+
+		<img src="<?= $path ?>" alt="">
+
+	</div>
 	<h1><?= $_GET['user']; ?></h1>
 
 	<div class="posts">
@@ -32,9 +45,9 @@
 
 				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
 				if($answerToNames != '') {
-					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . $post['content'] . '<br><br>';
+					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
 				} else {
-					print $post['content'] . '<br><br>';
+					print linkToAnchor($post['content']) . '<br><br>';
 				}
 	
 				foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
@@ -50,7 +63,7 @@
 
 						if($replyPost['answer_to_id'] != 0) {
 							print  $replyPost['username'] . '<br>';
-							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . $replyPost['content'];
+							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
 
 					?>
 					

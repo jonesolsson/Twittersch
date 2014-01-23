@@ -11,10 +11,12 @@
 <?php require 'navigation.php'; ?>		
 
 <?php
-	
+
 foreach (getCurrentUser() as $user) : ?>
 
-<form action="edit.php" method="POST">
+<form enctype="multipart/form-data" action="edit.php" method="POST">
+
+	<input type="file" name="upload"><br>
 	
 	<input type="hidden" name="id" value="<?= $user['id'] ?>">
 	<input type="hidden" name="current_mail" value="<?= sanitize($user['mail']) ?>">

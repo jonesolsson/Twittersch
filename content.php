@@ -42,9 +42,9 @@ require 'functions/functions.php';
 
 				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
 				if($answerToNames != '') {
-					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . $post['content'] . '<br><br>';
+					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
 				} else {
-					print $post['content'] . '<br><br>';
+					print linkToAnchor($post['content']) . '<br><br>';
 				}
 		
 				foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
@@ -59,7 +59,7 @@ require 'functions/functions.php';
 
 						if($replyPost['answer_to_id'] != 0) {	
 							print  $replyPost['username'] . '<br>';
-							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . $replyPost['content'];
+							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
 				
 
 					?>
@@ -86,8 +86,8 @@ require 'functions/functions.php';
 		</div>
 		<?php endforeach;
 
-			printPageLinks($pages, $start, '');		
-
+			printPageLinks($pages, $start, '');	
+    	
 	    ?>
 	</div>
 
