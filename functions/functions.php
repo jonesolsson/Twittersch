@@ -41,12 +41,12 @@ function writePostToDB($userId, $content) {
 
 }
 
-function getPostsFromDB() {
+function getPostsFromDB($start) {
 
 	$link = connection();
 
 	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id 
-			  ORDER BY posted DESC";
+			  ORDER BY posted DESC LIMIT $start, 3";
 
 	$result = mysqli_query($link, $query);
 
@@ -84,14 +84,14 @@ function contentError($content) {
 
 }
 
-function getPostsToProfile() {
+function getPostsToProfile($start) {
 
 	$user = $_GET['user'];
 
 	$link = connection();
 
 	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id
-			  WHERE users.username = '$user' ORDER BY posted DESC";
+			  WHERE users.username = '$user' ORDER BY posted DESC LIMIT $start,3";
 
 	$result = mysqli_query($link, $query);
 
@@ -170,9 +170,7 @@ if(isset($_POST['content'])) {
 
 }
 
-
-
-//Formulärhantering för replay
+//Formulärhantering för replay posts
 if(isset($_POST['reply'])) {
 
 	$userId  	  = $_SESSION['user_id'];
@@ -187,8 +185,9 @@ if(isset($_POST['reply'])) {
 
 		writeReplyPostToDB($userId, $content, $replyId, $answerToName, $conversId);
 
-		updatePostToConversation($conversId);	
-
+		if($conversId == 0) {
+			updatePostToConversation($conversId);	
+		}
 	}
 
 }
@@ -305,20 +304,75 @@ if (isset($_POST['update_username'])) {
 
 }
 
+//Paging
+function countAllPosts() {
 
+	$link = connection();
 
+	$query = "SELECT * FROM posts";
 
+	$result = mysqli_query($link, $query);
 
+	$rows = mysqli_num_rows($result);
 
+	return $rows;
 
+}
 
+function countUsersPosts($user) {
 
+	$link = connection();
 
+	$query = "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id
+			  WHERE users.username = '$user'";
 
+	$result = mysqli_query($link, $query);
 
+	$rows = mysqli_num_rows($result);
 
+	return $rows;
 
+}
 
+//Kolla om man bifinner sig på "content" eller "profile"
+if( ! empty($_GET['user'])) {
+	$numRows = countUsersPosts($_GET['user']);
+	print $_GET['user'];  
+} else {
+	$numRows = countAllPosts();
+}
+
+print $numRows;
+$view    = 3;
+$pages	 = ceil($numRows / $view);
+$start	 = 1;
+
+if(isset($_GET['page'])) {
+
+	$start = (int)$_GET['page'];
+
+	if($start < 1) {
+		$start = 1;
+	} elseif($start > $pages) {
+		$start = $pages;
+	}
+}
+
+//Skriver ut rätt antal länkar
+function printPageLinks($pages, $start, $username) {
+
+	for($i = 1; $i <= $pages; $i++) {
+
+		if($i == $start) {
+			print "<b>$i</b>";
+		} elseif( ! empty($_GET['user'])) {
+			print "<a href='profile.php?user=$username&page=$i'>$i</a>";
+		} else {
+			print "<a href='content.php?page=$i'>$i</a>";			
+		}	
+	}
+}
+	
 
 
 ?>

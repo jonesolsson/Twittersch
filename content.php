@@ -1,4 +1,8 @@
-<?php require 'functions/functions.php'; ?>
+<?php session_start(); if( ! empty($_SESSION['user'])) { 
+
+require 'functions/functions.php';
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +16,7 @@
 	
 	<?php require 'navigation.php'; ?>
 
-	<h1><?php foreach(getCurrentUser() as $user){print $user['username'];} print_r($_SESSION);?></h1>
+	<h1><?php foreach(getCurrentUser() as $user){print $user['username'];} ?></h1>
 
 	<form action="content.php" method="POST">
 		<textarea name="content" cols="30" rows="5"></textarea><br>
@@ -26,14 +30,14 @@
 		?>
 	</div><br><br>
 	<div class="posts">
-		<?php $posts = getPostsFromDB(); foreach ($posts as $post) : ?>
+		<?php $posts = getPostsFromDB(($start -1) * $view); foreach ($posts as $post) : ?>
 		<div class="post">
 			
 			<?php
 
-				$replyId  = $post['post_id']; 
-				$username = $post['username'];
-
+				$conversationId = $post['conversation_id'];
+				$replyId  	   = $post['post_id']; 
+				$username 	   = $post['username'];
 				$answerToNames = $post['answer_to_name'];
 
 				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
@@ -42,7 +46,7 @@
 				} else {
 					print $post['content'] . '<br><br>';
 				}
-				
+		
 				foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
 				<div class="reply_post">
 					
@@ -62,7 +66,7 @@
 					
 					<form action="content.php" method="POST">
 						<input type="text" name="reply">
-						<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
+						<input type="hidden" name="conversation_id" value="<?= $conversId ?>">
 					 	<input type="hidden" name="answer_to_name" value="<?= $replyName ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyToId ?>">
 						<input type="submit" value="reply">
@@ -73,16 +77,26 @@
 
 			<form action="content.php" method="POST">
 				<input type="text" name="reply">
-				<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
+				<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
 				<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 				<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 				<input type="submit" value="reply">
 			</form><br>
 
 		</div>
-		<?php endforeach; ?>
+		<?php endforeach;
+
+			printPageLinks($pages, $start, '');		
+
+	    ?>
 	</div>
 
 </body>
 </html>	
 
+<?php
+
+	} else {	
+		header('Location: index.php');
+	}
+?>

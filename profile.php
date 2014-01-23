@@ -11,20 +11,24 @@
 </head>
 <body>
 	
- 	<?php require 'navigation.php'; ?>	
+ 	<?php
+	 	if( ! empty($_SESSION['user'])) {
+ 			require 'navigation.php';				
+ 		}  
+ 	?>	
 
-	<h1><?= $_GET['user']; print_r($_SESSION); ?></h1>
+	<h1><?= $_GET['user']; ?></h1>
 
 	<div class="posts">
-		<?php $posts = getPostsToProfile(); foreach ($posts as $post) : ?>
+		<?php $posts = getPostsToProfile(($start -1) * $view); foreach ($posts as $post) : ?>
 		<div class="post">
 			
 			<?php
 
-				$replyId  = $post['post_id']; 
-				$username = $post['username'];
-
-				$answerToNames = $post['answer_to_name'];
+				$conversationId = $post['conversation_id'];
+				$replyId 	    = $post['post_id']; 
+				$username 		= $post['username'];
+				$answerToNames  = $post['answer_to_name'];
 
 				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
 				if($answerToNames != '') {
@@ -63,14 +67,18 @@
 				
 			<form action="profile.php?user=<?= $username ?>" method="POST">
 				<input type="text" name="reply">
-				<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
+				<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
 				<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 				<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 				<input type="submit" value="reply">
 			</form><br>
 
 		</div>
-		<?php endforeach; ?>
+		<?php endforeach;
+
+			printPageLinks($pages, $start, $_GET['user']);
+
+	    ?>
 	</div>
 
 </body>
