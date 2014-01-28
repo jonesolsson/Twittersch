@@ -1,0 +1,175 @@
+/*=================================================================================================================================== 
+ #Reset
+======================================================================================================================================*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {margin: 0;padding: 0;border: 0;	font-size: 100%;font: inherit;vertical-align: baseline; }article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block; }	body {line-height: 1; }	ol, ul {list-style: none; }	blockquote, q {quotes: none; }	blockquote:before, blockquote:after,q:before, q:after {	content: '';content: none; }table {	border-collapse: collapse;	border-spacing: 0; }
+
+/*=================================================================================================================================== 
+ #Less Vars
+======================================================================================================================================*/
+@main-color: #000;
+@link-color: @main-color;
+@border-color: #ccc;
+
+@light-text-color: #999;
+@heading-color: #222;
+@text-color: #555;
+
+@serif-font: Georgia, serif;
+@body-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@heading-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+/*=================================================================================================================================== 
+ #General
+======================================================================================================================================*/
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+	font: 14px/21px @body-font;
+	color: @text-color;
+	-webkit-font-smoothing: antialiased;
+}
+
+p, ul, ol {
+	margin-bottom: 21px;
+}
+
+a{
+	color: @link-color;
+	.transition();
+	cursor: pointer;
+	text-decoration: none;
+
+	&:hover{
+		color: darken(@link-color, 15%);
+	}
+}
+
+hr {
+	border: none;
+	height: 1px;
+	border-top: 1px solid @border-color;
+	margin: 21px 0;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: @heading-color;
+	font-family: @heading-font;
+	line-height: 1.1em;
+}
+
+h1 { font-size: 32px; }
+h2 { font-size: 26px; }
+h3 { font-size: 21px; }
+h4 { font-size: 16px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+
+blockquote {
+	font: italic 14px/21px @serif-font;
+	color: @text-color;
+	border-left: 2px solid @border-color;
+	margin: 21px 0;
+
+	cite {
+		display: block;
+		color: @light-text-color;
+		font: normal 12px/21px @body-font;
+	}
+}
+
+em, i{ font-style: italic; }
+strong, b {font-weight: bold; color: darken(@text-color, 10%);}
+
+
+/*=================================================================================================================================== 
+ #Helpers
+======================================================================================================================================*/
+
+
+
+/*=================================================================================================================================== 
+/* #Less Mixins
+======================================================================================================================================*/
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.round (@radius: 5px) {
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+	border-radius: @radius;
+
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+.gradient(@startColor: #555, @endColor: #333) {
+  background-color: @startColor;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(@startColor), to(@endColor)); 
+  background-image: -moz-linear-gradient(top, @startColor, @endColor); 
+  background-image: -ms-linear-gradient(top, @startColor, @endColor); 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, @startColor), color-stop(100%, @endColor)); 
+  background-image: -webkit-linear-gradient(top, @startColor, @endColor); 
+  background-image: -o-linear-gradient(top, @startColor, @endColor); 
+  background-image: linear-gradient(top, @startColor, @endColor); 
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@startColor,@endColor));
+}
+
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
+	-webkit-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+.inner-shadow (inset, @x: 0, @y: 0, @blur: 1px, @color: #000) {
+	-webkit-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+.transition(@duration:0.2s, @ease:ease-out, @delay:0s) {
+  -webkit-transition: all @duration @ease @delay;
+     -moz-transition: all @duration @ease @delay;
+     -o-transition: all @duration @ease @delay; 
+          transition: all @duration @ease @delay;
+}
+
+.opacity( @opacity: 0.8 ) {
+    @ieopacity: @opacity * 100;
+    filter: ~"alpha(opacity = @{ieopacity} )";
+     
+   -webkit-opacity: @opacity;
+    -khtml-opacity: @opacity;
+      -moz-opacity: @opacity;
+           opacity: @opacity;
+}
+
+.rotate(@deg : 90deg){
+	-webkit-transform: rotate(@deg);  
+     -moz-transform: rotate(@deg); 
+      -ms-transform: rotate(@deg);  
+       -o-transform: rotate(@deg);  
+          transform: rotate(@deg);
+}
+
+.scale(@size : 0.5){
+	-webkit-transform: scale(@size);
+     -moz-transform: scale(@size);
+      -ms-transform: scale(@size);
+       -o-transform: scale(@size);
+          transform: scale(@size);
+}

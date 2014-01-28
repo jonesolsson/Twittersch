@@ -342,7 +342,7 @@ function getProfileImg($username) {
 
 }
 
- $error = '';	
+ $imageError = [];	
 
  //Uppladdning av bilder
  if(isset($_FILES['upload'])) {
@@ -372,19 +372,19 @@ function getProfileImg($username) {
 
  			} else {
 
- 				$error = 'Filen måste vara en bild!';
+ 				$imageError[] = 'Filen måste vara en bild!';
 
  			}
 
  		} else {
 
- 			$error = 'Filen är för stor!';
+ 			$imageError[] = 'Filen är för stor!';
 
  		} 			
 
  	} else {
 
- 		$error = 'Uppladdningen misslyckades';
+ 		$imageError[] = 'Uppladdningen misslyckades';
 
  	}
 
@@ -481,10 +481,6 @@ function printPageLinks($pages, $start, $username) {
 		}	
 	}
 }
-
-
-
-
 	
 
 

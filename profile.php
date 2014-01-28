@@ -6,92 +6,138 @@
 <head>
 
 	<title>Twittersch</title>
-	<style>.reply_post{margin-left: 30px;} .profile-pic img {width: 200px;}</style>
+	
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/main.css" />
+	<link rel="stylesheet" href="css/ionicons.min.css" />
+
 
 </head>
 <body>
-	
- 	<?php
+
+	<div class="container">
+
+		<?php
+
 	 	if( ! empty($_SESSION['user'])) {
  			require 'navigation.php';				
  		}  
- 	?>	
+
+ 		?>	
 	
-	<div class="profile-pic">
-		<?php
 
-			 foreach(getProfileImg($_GET['user']) as $user) {
+		<div class="row-fluid profile-press">
 
-			 	$path = $user['url'];
+			<div class="span3"></div>		
 
-			 }
-		?>
+			<div class="span3 user-press">
+				<h1><?= $_GET['user']; ?></h1>
+			</div>					
 
-		<img src="<?= $path ?>" alt="">
+			<div class="span3">
 
-	</div>
-	<h1><?= $_GET['user']; ?></h1>
+				<div class="profile-pic">
+					<?php
 
-	<div class="posts">
-		<?php $posts = getPostsToProfile(($start -1) * $view); foreach ($posts as $post) : ?>
-		<div class="post">
-			
-			<?php
+						 foreach(getProfileImg($_GET['user']) as $user) {
 
-				$conversationId = $post['conversation_id'];
-				$replyId 	    = $post['post_id']; 
-				$username 		= $post['username'];
-				$answerToNames  = $post['answer_to_name'];
+						 	$path = $user['url'];
 
-				print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
-				if($answerToNames != '') {
-					print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
-				} else {
-					print linkToAnchor($post['content']) . '<br><br>';
-				}
-	
-				foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
-				<div class="reply_post">
+						 }
+					?>
+
+					<img src="<?= $path ?>" alt="profile-picture">
+
+				</div>
+
+			</div>
+		
+			<div class="span3"></div>	
+
+		</div>
+
+		<div class="row-fluid profile-posts">
+
+			<div class="span3"></div>
+			<div class="span3"></div>
+
+			<div class="span3">
+
+				<?php $posts = getPostsToProfile(($start -1) * $view); foreach ($posts as $post) : ?>
+				<div class="post">
 					
 					<?php
 
-						$replyToId 	  = $replyPost['post_id'];
-						$conversId    = $replyPost['conversation_id'];
-						$replyName 	  = $replyPost['username'];
-						$answerToName = $replyPost['answer_to_name'];
+						$conversationId = $post['conversation_id'];
+						$replyId 	    = $post['post_id']; 
+						$username 		= $post['username'];
+						$answerToNames  = $post['answer_to_name'];
+
+						print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
+						if($answerToNames != '') {
+							print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
+						} else {
+							print linkToAnchor($post['content']) . '<br><br>';
+						}
+			
+						foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
+						<div class="reply_post">
+							
+							<?php
+
+								$replyToId 	  = $replyPost['post_id'];
+								$conversId    = $replyPost['conversation_id'];
+								$replyName 	  = $replyPost['username'];
+								$answerToName = $replyPost['answer_to_name'];
 
 
-						if($replyPost['answer_to_id'] != 0) {
-							print  $replyPost['username'] . '<br>';
-							print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
+								if($replyPost['answer_to_id'] != 0) {
+									print  $replyPost['username'] . '<br>';
+									print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
 
-					?>
-					
-					<form action="content.php" method="POST">
+							?>
+							
+							<form action="content.php" method="POST">
+								<input type="text" name="reply">
+								<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
+							 	<input type="hidden" name="answer_to_name" value="<?= $replyName ?>">
+								<input type="hidden" name="reply_id" value="<?= $replyToId ?>">
+								<input type="submit" value="reply">
+							</form><br>	
+						</div>
+
+						<?php } endforeach; ?>
+						
+					<form action="profile.php?user=<?= $username ?>" method="POST">
 						<input type="text" name="reply">
-						<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
-					 	<input type="hidden" name="answer_to_name" value="<?= $replyName ?>">
-						<input type="hidden" name="reply_id" value="<?= $replyToId ?>">
+						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
+						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 						<input type="submit" value="reply">
-					</form><br>	
+					</form><br>
+
+				</div>			
+				<?php endforeach; ?>
+
+				<div class="pagecount">
+
+					<?php
+						printPageLinks($pages, $start, $_GET['user']);
+
+				    ?>
+					
 				</div>
 
-				<?php } endforeach; ?>
-				
-			<form action="profile.php?user=<?= $username ?>" method="POST">
-				<input type="text" name="reply">
-				<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
-				<input type="hidden" name="answer_to_name" value="<?= $username ?>">
-				<input type="hidden" name="reply_id" value="<?= $replyId ?>">
-				<input type="submit" value="reply">
-			</form><br>
+		    </div>
+
+			<div class="span3"></div>
 
 		</div>
-		<?php endforeach;
 
-			printPageLinks($pages, $start, $_GET['user']);
-
-	    ?>
 	</div>
 
 </body>

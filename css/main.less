@@ -1,0 +1,209 @@
+/*=================================================================================================================================== 
+ #Import Base
+======================================================================================================================================*/
+@import 'base.less';
+
+/*=================================================================================================================================== 
+ #Header
+======================================================================================================================================*/
+
+.nav {
+
+	padding: 20px;
+	
+	ul {
+		float: right;
+	}
+
+	ul li {
+		display: inline;
+	}
+
+	a {
+		padding: 0 0 0 10px;
+	}
+
+}
+
+/*=================================================================================================================================== 
+ #Content
+======================================================================================================================================*/
+//INDEX PAGE
+
+.index-wrap {
+	margin-top: 150px;
+}
+
+.login-wrap,
+.register-wrap {
+	width: 25%;
+	margin: 0 auto;
+
+	form {
+		font-size: 18px;
+	}
+
+	label {
+		position: absolute;
+
+		i {
+			
+		}
+
+	}
+
+	.ion-ios7-email-outline {
+		font-size: 70px;
+		margin: 0 0 0 0;
+	}
+
+	.ion-ios7-locked-outline {
+		font-size: 45px;
+		margin: 33px 0 0 0;
+	}
+
+	input[type="text"],
+	input[type="password"],
+	input[type="email"] {
+		float: right;
+		width: 75%;
+		font-size: 100%;
+		height: 40px;
+		padding: 0 0 0 5px;
+		border: 2px solid;
+		margin-bottom: 10px;
+	}
+
+	input[type="submit"] {
+		width: 100%;
+		padding: 15px 0;
+		background-color: #000;
+		color: #fff;
+		border: 2px solid #000;
+		font-size: 16px;
+	}
+
+}
+
+.form-divide {
+	width: 25%;
+	margin: 0 auto;
+	font-size: 30px;
+	text-align: center;
+	margin-bottom: 15px;
+	line-height: 30px;
+	color: #ed145b;
+
+	p {
+		margin-bottom: 5px;
+	}
+	
+	.ion-arrow-down-c {
+		font-size: 45px;
+		color: #ed145b;
+	}
+}
+
+//CONTENT PAGE
+.tweet-form-wrap {
+
+	form {	
+
+		width: 80%;
+		margin: 0 auto;
+
+		input, textarea {
+			width: 100%;
+		}		
+
+		input[type="submit"] {
+			border: 2px solid;
+			background-color: #fff;
+		}
+
+	}	
+
+}
+
+.posts-wrap {
+	margin-top: 40px;
+}
+
+.post {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.pagecount {
+	float: right;
+}
+
+
+//PROFILE PAGE
+
+.profile-press {
+
+	.user-press {
+		text-align: right;
+	}
+
+}
+
+.profile-pic img {
+	width: 200px;
+}
+
+.profile-posts {
+
+	.pagecount {
+		float: right;
+	}
+
+}
+
+//EDIT PAGE
+.edit-form-wrap {
+
+	input {
+		float: right;
+	}
+
+}
+
+
+/*=================================================================================================================================== 
+ #Footer
+======================================================================================================================================*/
+
+
+/*=================================================================================================================================== 
+ #Import Forms & buttons
+======================================================================================================================================*/
+
+
+/*=================================================================================================================================== 
+ #MediaQ
+======================================================================================================================================*/
+
+/* Smaller than 1200 (devices and browsers) */
+@media only screen and (max-width: 1199px) { }
+
+/* Tablet Portrait size to standard 960 (devices and browsers) */
+@media only screen and (min-width: 768px) and (max-width: 979px) { }
+
+/* All Mobile Sizes (devices and browser) */
+@media only screen and (max-width: 767px) { }
+
+/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+@media only screen and (min-width: 480px) and (max-width: 767px) { }
+
+/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+@media only screen and (max-width: 479px) { }
+
+/*=================================================================================================================================== 
+ #Retina displays
+======================================================================================================================================*/
+@media(-webkit-min-device-pixel-ratio: 2) { }
+
+
+
