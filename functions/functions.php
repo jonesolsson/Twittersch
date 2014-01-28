@@ -46,7 +46,7 @@ function getPostsFromDB($start) {
 	$link = connection();
 
 	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id 
-			  ORDER BY posted DESC LIMIT $start, 3";
+			  ORDER BY posted DESC LIMIT $start, 10";
 
 	$result = mysqli_query($link, $query);
 
@@ -91,7 +91,7 @@ function getPostsToProfile($start) {
 	$link = connection();
 
 	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id
-			  WHERE users.username = '$user' ORDER BY posted DESC LIMIT $start,3";
+			  WHERE users.username = '$user' ORDER BY posted DESC LIMIT $start, 10";
 
 	$result = mysqli_query($link, $query);
 
@@ -126,7 +126,7 @@ function getReplayPostsFromDB($postid) {
 
 	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users
 			  ON posts.user_id = users.id WHERE conversation_id='$postid' 
-			  ORDER BY posted ASC";@@
+			  ORDER BY posted ASC";
 
 	$result = mysqli_query($link, $query);
 
@@ -452,7 +452,7 @@ if( ! empty($_GET['user'])) {
 	$numRows = countAllPosts();
 }
 
-$view    = 3;
+$view    = 10;
 $pages	 = ceil($numRows / $view);
 $start	 = 1;
 

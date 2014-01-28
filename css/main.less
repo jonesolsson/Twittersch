@@ -127,11 +127,63 @@
 
 .posts-wrap {
 	margin-top: 40px;
+
+	.reply-form {
+		
+	}
+
+	.sender {
+		font-weight: 800;
+		font-size: 14px;
+	}
+
+	.show-conversation {
+		font-size: 13px;
+		border-bottom: 1px dotted;
+	}
+
+	p {
+		margin-bottom: 10px;
+	}
+
+	.post-menu {
+		overflow: hidden;
+		width: 50%;
+		float: right;
+
+		ul {
+			float: right;
+			margin: 0;
+		}
+
+	}	
+
 }
 
 .post {
 	width: 80%;
 	margin: 0 auto;
+	border-bottom: 1px solid #ccc;
+	padding: 15px 0;
+}
+
+.reply-post {
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #ccc;
+	padding: 15px 0;
+}
+
+.reply-post-form {
+
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
 }
 
 .pagecount {
@@ -147,10 +199,51 @@
 		text-align: right;
 	}
 
+	h1 {
+		margin-bottom: 15px;
+	}
+
+	.profile-pic img {
+		width: 200px;
+	}
 }
 
-.profile-pic img {
-	width: 200px;
+.tweet-form-wrap {
+
+	.span2 h1 {
+		text-align: right;
+	}
+
+	.tweet-form {
+		width: 95%;
+		margin: 0;
+		height: 81px;
+	}
+
+	textarea {
+		height: 100%;
+		border: 2px solid #000;
+	}
+
+	.span1 {
+		margin: 0;
+		height: 81px;
+	}
+
+	.span1 input {
+		width: 100%;
+		background-color: #fff;
+		color: #000;
+		border: 2px solid;
+		height: 100%;
+	}
+
+	.span1 input:hover {
+		color: #fff;
+		background-color: #000;
+	}
+
+
 }
 
 .profile-posts {
@@ -164,8 +257,66 @@
 //EDIT PAGE
 .edit-form-wrap {
 
-	input {
+	font-size: 18px;
+
+	.change-pic {
+		width: 100%;
+		overflow: hidden;
+		margin-bottom: 20px;
+	}
+
+	input[type="file"] {
+		float: left;
+		width: 45%; 
+	}
+
+	.profile-pic {
+		width: 55%;
 		float: right;
+
+		img {
+			width: 100%;
+		}
+	}
+	
+	form {
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.input-wrap {		
+		margin-bottom: 10px;
+		height: 35px;
+	}
+
+	input[type="text"],
+	input[type="mail"],
+	input[type="password"] {
+		width: 55%;
+		height: 100%;
+		float: right;
+		font-size: 100%;
+	}
+
+	label {
+		float: left;
+		width: 37%;
+		margin-top: 6px;
+	}
+
+	.presentation {
+		margin-top: 15px;
+	}
+
+	textarea {
+		width: 100%;
+	}
+
+	input[type="submit"] {
+		float: right;
+		width: 50%;
+		border: 2px solid;
+		background-color: #fff;
 	}
 
 }

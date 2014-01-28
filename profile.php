@@ -24,11 +24,19 @@
 		<?php
 
 	 	if( ! empty($_SESSION['user'])) {
- 			require 'navigation.php';				
+ 			require 'navigation.php';
+
+ 			$currentUser = getCurrentUser();
+
+ 			foreach ($currentUser as $user) {
+ 				
+ 				$userPresentation = $user['presentation'];
+
+ 			}
+
  		}  
 
- 		?>	
-	
+ 		?>		
 
 		<div class="row-fluid profile-press">
 
@@ -36,11 +44,15 @@
 
 			<div class="span3 user-press">
 				<h1><?= $_GET['user']; ?></h1>
+				<p>
+					<?= $userPresentation ?>
+				</p>
 			</div>					
 
 			<div class="span3">
 
 				<div class="profile-pic">
+					
 					<?php
 
 						 foreach(getProfileImg($_GET['user']) as $user) {
@@ -60,12 +72,11 @@
 
 		</div>
 
-		<div class="row-fluid profile-posts">
+		<div class="row-fluid">
 
 			<div class="span3"></div>
-			<div class="span3"></div>
 
-			<div class="span3">
+			<div class="span6 posts-wrap">
 
 				<?php $posts = getPostsToProfile(($start -1) * $view); foreach ($posts as $post) : ?>
 				<div class="post">
@@ -79,13 +90,25 @@
 
 						print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
 						if($answerToNames != '') {
-							print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
+							// print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
+							print "<p><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
+							print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 						} else {
-							print linkToAnchor($post['content']) . '<br><br>';
+							// print linkToAnchor($post['content']) . '<br><br>';
+							print '<p>' . linkToAnchor($post['content']) . '</p>';
+							print "<a href='#' class='show-conversation'>" . 'Visa Konversation' . "</a>";
 						}
-			
-						foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
-						<div class="reply_post">
+						
+						?>
+
+						<div class="post-menu">
+							<ul>
+								<li><a href="#" class="answer-to-post">Svara</a></li>
+							</ul>								
+						</div>
+
+						<?php foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
+						<div class="reply-post hide">
 							
 							<?php
 
@@ -101,7 +124,7 @@
 
 							?>
 							
-							<form action="content.php" method="POST">
+							<form action="content.php" method="POST" class="reply-post-form hide">
 								<input type="text" name="reply">
 								<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
 							 	<input type="hidden" name="answer_to_name" value="<?= $replyName ?>">
@@ -112,7 +135,7 @@
 
 						<?php } endforeach; ?>
 						
-					<form action="profile.php?user=<?= $username ?>" method="POST">
+					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
 						<input type="text" name="reply">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
 						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
@@ -139,6 +162,10 @@
 		</div>
 
 	</div>
+
+<!-- JavaScript -->
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>	
