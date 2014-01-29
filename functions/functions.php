@@ -9,9 +9,31 @@ function sanitize($str) {
     return filter_var($str, FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
-function getCurrentUser() {
+function getCurrentUserName($username) {
 
-	$userId = $_SESSION['user_id'];
+	//$userId = $_SESSION['user_id'];
+
+	$link = connection();
+
+	$query = "SELECT * FROM users WHERE username='$username'";
+
+	$result = mysqli_query($link, $query);
+
+	$currentUser = [];
+
+	while($row = mysqli_fetch_assoc($result)) {
+
+		$currentUser[] = $row;
+
+	}
+
+	return $currentUser;
+
+}
+
+function getCurrentUserId($userId) {
+
+	//$userId = $_SESSION['user_id'];
 
 	$link = connection();
 
@@ -146,7 +168,7 @@ function updatePostToConversation($conversId) {
 
 	$link = connection();
 
-	$query = "UPDATE posts SET conversation_id='$conversId'
+	$query = "UPDATE posts SET posted=posted, conversation_id='$conversId'
 			  WHERE id=$conversId";
 
 	mysqli_query($link, $query);
@@ -178,6 +200,7 @@ if(isset($_POST['reply'])) {
 	$replyId 	  = $_POST['reply_id'];
 	$answerToName = $_POST['answer_to_name'];
 	$conversId    = $_POST['conversation_id'];
+	$currentConversId = $_POST['current_conversation_id'];
 
 	$errors = contentError($content);
 
@@ -185,7 +208,7 @@ if(isset($_POST['reply'])) {
 
 		writeReplyPostToDB($userId, $content, $replyId, $answerToName, $conversId);
 
-		if($conversId == 0) {
+		if($currentConversId == 0) {
 			updatePostToConversation($conversId);	
 		}
 	}
@@ -259,6 +282,8 @@ function isUsernameTakenUpdate($currentUsername, $newUsername) {
 
 }
 
+$fel = '';
+
 //Uppdatera profildata
 if (isset($_POST['update_username'])) {
 
@@ -279,9 +304,9 @@ if (isset($_POST['update_username'])) {
 	$doesUserExist   = doesUserExistUpdate($currentMail, $updateMail);	
 
 	if(count($doesUserExist) != 0) {
-		print 'Den här e-posten har redan ett registrerat konto';
+		$fel = 'Den här e-posten har redan ett registrerat konto';
 	} elseif(count($isUsernameTaken) != 0) {
-		print 'Användarnamnet är redan taget';
+		$fel = 'Användarnamnet är redan taget';
  	} else {
 
  		$errors = validateRegister($updateUsername, $updateMail, $updatePassword);	
@@ -300,7 +325,7 @@ if (isset($_POST['update_username'])) {
 
 		} 
 	}
-}
+} 
 
 //Bilduppladdning
 function PostImgUrlToDB($url, $userId) {

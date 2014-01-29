@@ -26,15 +26,15 @@
 	 	if( ! empty($_SESSION['user'])) {
  			require 'navigation.php';
 
- 			$currentUser = getCurrentUser();
+ 		}  
+
+ 		$currentUser = getCurrentUserName($_GET['user']);
 
  			foreach ($currentUser as $user) {
  				
- 				$userPresentation = $user['presentation'];
+ 			$userPresentation = $user['presentation'];
 
- 			}
-
- 		}  
+ 		}
 
  		?>		
 
@@ -90,19 +90,19 @@
 
 						print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
 						if($answerToNames != '') {
-							// print "<a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '<br><br>';
 							print "<p><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
-							print "<a href='#' class=''>" . 'Detaljer' . "</a>";
+							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 						} else {
 							// print linkToAnchor($post['content']) . '<br><br>';
 							print '<p>' . linkToAnchor($post['content']) . '</p>';
-							print "<a href='#' class='show-conversation'>" . 'Visa Konversation' . "</a>";
+							// print "<a href='#' class='show-conversation'>" . 'Visa Konversation' . "</a>";
 						}
 						
 						?>
 
 						<div class="post-menu">
 							<ul>
+								<li><a href="#" class="show-conversation">Visa Konversation</a></li>
 								<li><a href="#" class="answer-to-post">Svara</a></li>
 							</ul>								
 						</div>
@@ -119,21 +119,16 @@
 
 
 								if($replyPost['answer_to_id'] != 0) {
+								
 									print  $replyPost['username'] . '<br>';
 									print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
 
-							?>
-							
-							<form action="content.php" method="POST" class="reply-post-form hide">
-								<input type="text" name="reply">
-								<input type="hidden" name="conversation_id" value="<?= $replyId ?>">
-							 	<input type="hidden" name="answer_to_name" value="<?= $replyName ?>">
-								<input type="hidden" name="reply_id" value="<?= $replyToId ?>">
-								<input type="submit" value="reply">
-							</form><br>	
+								}
+							?>							
+
 						</div>
 
-						<?php } endforeach; ?>
+						<?php endforeach; ?>
 						
 					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
 						<input type="text" name="reply">
@@ -141,7 +136,7 @@
 						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 						<input type="submit" value="reply">
-					</form><br>
+					</form>
 
 				</div>			
 				<?php endforeach; ?>

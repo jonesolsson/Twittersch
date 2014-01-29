@@ -42,7 +42,7 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 
 	if(count($currentUser) == 0) {
 
-		print 'fel kombination av e-post/lösenord';
+		$error = 'fel kombination av e-post/lösenord';
 
 	} else {
 		
@@ -62,12 +62,14 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 			
 		} else {
 
-			print 'fel kombination av e-post/lösenord';
+			$error = 'fel kombination av e-post/lösenord';
 			
 		}
 
 	}
 
+} else {
+	$error = '';
 } 
 
 //Registrera ny användare-delen börjar här

@@ -20,23 +20,22 @@
 
 	<?php require 'navigation.php'; ?>
 
-	<div class="row-fluid">	
+	<div class="row-fluid edit">	
 
 		<div class="span3"></div>
 
 		<div class="span6 edit-form-wrap">
 
-			<?php foreach (getCurrentUser() as $user) : 
 
+			<?php foreach (getCurrentUserId($_SESSION['user_id']) as $user) : 
 
-			foreach(getProfileImg($user['username']) as $user) {
+				foreach(getProfileImg($user['username']) as $user) {
 
-			 	$path = $user['url'];
+				 	$path = $user['url'];
 
-			}
+				}
 
-			?>
-						
+			?>						
 
 			<form enctype="multipart/form-data" action="edit.php" method="POST">
 
@@ -84,6 +83,20 @@
 			</form>
 
 			<?php endforeach; ?>
+
+			<div class="error-wrap">
+				
+			<?php
+
+				foreach($errors as $error) {
+					print '<p>' . $error . '</p>';
+				} 
+
+				print $fel;
+
+			?>
+
+			</div>	
 		
 		</div>
 
@@ -91,8 +104,12 @@
 
 	</div>
 
-
 </div>	
+
+<!-- JavaScript -->
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/script.js"></script>
+
 
 </body>
 </html>
