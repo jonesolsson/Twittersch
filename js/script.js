@@ -9,7 +9,7 @@ $( document ).ready(function() {
 
 			$(test[i]).find('.show-conversation').html('');
 
-		}		
+		}
 
 	}
 
@@ -30,6 +30,8 @@ $( document ).ready(function() {
 	
 		} */
 
+
+		$(postDiv).toggleClass('reply-post-color');	
 
 		$(postDiv).find('.reply-post').toggleClass('show')
 
@@ -52,6 +54,8 @@ $( document ).ready(function() {
 		var postDiv = targetObj[3];
 
 		$(postDiv).find('.reply-form').toggleClass('show');
+
+		$(postDiv).toggleClass('reply-post-color');	
 
 		event.preventDefault();
 

@@ -76,7 +76,7 @@
 				
 				<div class="presentation">
 					<label for="presentation">presentation</label>
-					<textarea name="update_presentation" cols="30" rows="10" value="<?= sanitize($user['presentation']); ?>"></textarea><br>
+					<textarea name="update_presentation" cols="30" rows="10"><?= sanitize($user['presentation']); ?></textarea><br>
 					<input type="submit" value="uppdatera">
 				</div>
 				

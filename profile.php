@@ -72,7 +72,7 @@
 
 		</div>
 
-		<div class="row-fluid">
+		<div class="row-fluid feed">
 
 			<div class="span3"></div>
 
@@ -131,11 +131,17 @@
 						<?php endforeach; ?>
 						
 					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
-						<input type="text" name="reply">
+						<!-- <input type="text" name="reply"> -->
+						<textarea name="reply"></textarea>
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
 						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
-						<input type="submit" value="reply">
+						
+						<div class="test">
+							<i class="ion-paper-airplane"></i>
+							<input type="submit" value="">
+						</div>
+						
 					</form>
 
 				</div>			

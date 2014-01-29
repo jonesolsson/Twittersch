@@ -92,9 +92,10 @@
 
 		width: 80%;
 		margin: 0 auto;
+		height: 120px;
 
 		input, textarea {
-			width: 100%;
+			width: 98%;
 		}		
 
 		input[type="submit"] {
@@ -106,6 +107,8 @@
 
 	.tweet-btn {
 		position: relative;
+		height: 60px;
+		margin-top: 60px;
 
 		i {
 			position: absolute;
@@ -117,6 +120,10 @@
 		}
 	}
 
+}
+
+.feed {
+	margin-top: 90px;
 }
 
 .posts-wrap {
@@ -161,18 +168,19 @@
 }
 
 .post {
-	width: 80%;
-	margin: 0 auto;
+	width: 100%;
+	//margin: 0 auto;
 	border-bottom: 1px solid #ccc;
-	padding: 15px 0;
+	padding: 15px 10px;
 
 	.reply-form {
 		width: 100%;
-		overflow: hidden;		
+		overflow: hidden;	
+		margin-top: 15px;	
 		
 		textarea {
 			width: 60%;
-			height: 50px;
+			height: 100px;
 			float: left;
 			margin-right: 5px;
 			border: 1px solid #000;
@@ -190,6 +198,7 @@
 			width: 55px;
 			height: 50px;
 			float: left;
+			margin-top: 50px;
 		}
 
 		i {
@@ -203,11 +212,6 @@
 
 
 	}
-	
-	
-
-
-
 
 }
 
@@ -215,7 +219,11 @@
 	width: 100%;
 	margin: 0 auto;
 	border-bottom: 1px solid #ccc;
-	padding: 15px 0;
+	padding: 15px 10px;
+}
+
+.reply-post-color {
+	background-color: rgba(238, 238, 238, 0.3);
 }
 
 .hide {
@@ -227,7 +235,10 @@
 }
 
 .pagecount {
-	float: right;
+	width: 100%;
+	padding: 15px 0;
+	text-align: right;
+	font-size: 20px;
 }
 
 
@@ -250,24 +261,28 @@
 
 .tweet-form-wrap {
 
+	margin-top: 50px;
+
 	.span2 h1 {
 		text-align: right;
 	}
 
 	.tweet-form {
-		width: 95%;
+		width: 100%;
 		margin: 0;
-		height: 81px;
+		height: 120px;
 	}
 
 	textarea {
+		width: 90%;
 		height: 100%;
 		border: 2px solid #000;
 	}
 
 	.span1 {
 		margin: 0;
-		height: 81px;
+		height: 60px;
+		margin-top: 60px;
 	}
 
 	.span1 input {

@@ -289,10 +289,11 @@ b {
 .tweet-form-wrap form {
   width: 80%;
   margin: 0 auto;
+  height: 120px;
 }
 .tweet-form-wrap form input,
 .tweet-form-wrap form textarea {
-  width: 100%;
+  width: 98%;
 }
 .tweet-form-wrap form input[type="submit"] {
   border: 2px solid;
@@ -300,6 +301,8 @@ b {
 }
 .tweet-form-wrap .tweet-btn {
   position: relative;
+  height: 60px;
+  margin-top: 60px;
 }
 .tweet-form-wrap .tweet-btn i {
   position: absolute;
@@ -308,6 +311,9 @@ b {
   font-size: 30px;
   margin-top: -15px;
   margin-left: -15px;
+}
+.feed {
+  margin-top: 90px;
 }
 .posts-wrap {
   margin-top: 40px;
@@ -338,18 +344,18 @@ b {
   float: left;
 }
 .post {
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
   border-bottom: 1px solid #ccc;
-  padding: 15px 0;
+  padding: 15px 10px;
 }
 .post .reply-form {
   width: 100%;
   overflow: hidden;
+  margin-top: 15px;
 }
 .post .reply-form textarea {
   width: 60%;
-  height: 50px;
+  height: 100px;
   float: left;
   margin-right: 5px;
   border: 1px solid #000;
@@ -365,6 +371,7 @@ b {
   width: 55px;
   height: 50px;
   float: left;
+  margin-top: 50px;
 }
 .post .reply-form i {
   position: absolute;
@@ -378,7 +385,10 @@ b {
   width: 100%;
   margin: 0 auto;
   border-bottom: 1px solid #ccc;
-  padding: 15px 0;
+  padding: 15px 10px;
+}
+.reply-post-color {
+  background-color: rgba(238, 238, 238, 0.3);
 }
 .hide {
   display: none;
@@ -387,7 +397,10 @@ b {
   display: block;
 }
 .pagecount {
-  float: right;
+  width: 100%;
+  padding: 15px 0;
+  text-align: right;
+  font-size: 20px;
 }
 .profile-press .user-press {
   text-align: right;
@@ -398,21 +411,26 @@ b {
 .profile-press .profile-pic img {
   width: 200px;
 }
+.tweet-form-wrap {
+  margin-top: 50px;
+}
 .tweet-form-wrap .span2 h1 {
   text-align: right;
 }
 .tweet-form-wrap .tweet-form {
-  width: 95%;
+  width: 100%;
   margin: 0;
-  height: 81px;
+  height: 120px;
 }
 .tweet-form-wrap textarea {
+  width: 90%;
   height: 100%;
   border: 2px solid #000;
 }
 .tweet-form-wrap .span1 {
   margin: 0;
-  height: 81px;
+  height: 60px;
+  margin-top: 60px;
 }
 .tweet-form-wrap .span1 input {
   width: 100%;

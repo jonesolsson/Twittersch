@@ -52,6 +52,14 @@ require 'functions/functions.php';
 				<form action="content.php" method="POST" class="tweet-form">
 					<textarea name="content"></textarea>
 
+					<div class="errors">
+						<?php
+						foreach($errors as $error) {
+							print $error;
+						}
+						?>
+				</div>
+
 			</div>
 
 			<div class="span1 tweet-btn">
@@ -63,19 +71,13 @@ require 'functions/functions.php';
 			
 			<div class="span3">
 				
-				<div class="errors">
-					<?php
-						foreach($errors as $error) {
-							print $error;
-						}
-					?>
-				</div>
+
 
 			</div>
 
 		</div>
 
-		<div class="row-fluid">
+		<div class="row-fluid feed">
 				
 			<div class="span3"></div>
 			
