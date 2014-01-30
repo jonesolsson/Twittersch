@@ -34,6 +34,13 @@
  				
  			$userPresentation = $user['presentation'];
 
+
+ 			if($user['image_url'] == '') {
+ 				$path = 'images/def.jpg';
+ 			} else {
+ 				$path = $user['image_url'];   
+ 			}
+
  		}
 
  		?>		
@@ -51,16 +58,7 @@
 
 			<div class="span3">
 
-				<div class="profile-pic">
-					
-					<?php
-
-						 foreach(getProfileImg($_GET['user']) as $user) {
-
-						 	$path = $user['url'];
-
-						 }
-					?>
+				<div class="profile-pic">					
 
 					<img src="<?= $path ?>" alt="profile-picture">
 

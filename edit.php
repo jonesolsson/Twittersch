@@ -29,11 +29,12 @@
 
 			<?php foreach (getCurrentUserId($_SESSION['user_id']) as $user) : 
 
-				foreach(getProfileImg($user['username']) as $user) {
-
-				 	$path = $user['url'];
-
+				if($user['image_url'] == '') {
+					$path = 'images/def.jpg';
+				} else {
+					$path = $user['image_url'];	
 				}
+				
 
 			?>						
 
@@ -47,7 +48,7 @@
 
 					</div>
 
-					<input type="file" name="upload"><br>					
+					<input type="file" name="upload">					
 
 				</div>	
 				
@@ -57,29 +58,63 @@
 				
 				<div class="input-wrap">
 					<label for="username">användarnamn</label>
-					<input type="text" name="update_username" value="<?= sanitize($user['username']); ?>"><br>
+					<input type="text" name="update_username" value="<?= sanitize($user['username']); ?>">
 				</div>
 				
 				<div class="input-wrap">
 					<label for="mail">e-post</label>
-					<input type="mail" name="update_mail" value="<?= sanitize($user['mail']); ?>"><br>
+					<input type="mail" name="update_mail" value="<?= sanitize($user['mail']); ?>">
 				</div>
 
-				<div class="input-wrap">
+<!-- 				<div class="input-wrap">
 					<label for="password">lösenord</label>
-					<input type="password" name="update_password" value="<?= sanitize($user['password']); ?>"><br>
+					<input type="password" name="update_password">
 				</div>	
 				<div class="input-wrap">	
 					<label for="confirm_password">bekräfta lösenord</label>
-					<input type="password" name="update_confirm_password" value="<?= sanitize($user['password']); ?>"><br><br>
-				</div>
+					<input type="password" name="update_confirm_password"><br>
+				</div> -->
 				
 				<div class="presentation">
 					<label for="presentation">presentation</label>
-					<textarea name="update_presentation" cols="30" rows="10"><?= sanitize($user['presentation']); ?></textarea><br>
+					<textarea name="update_presentation" cols="30" rows="10"><?= sanitize($user['presentation']); ?></textarea>
 					<input type="submit" value="uppdatera">
 				</div>
 				
+			</form>
+
+			<div class="error-wrap">
+				
+				<?php
+
+				foreach($errors as $error) {
+					print '<p>' . $error . '</p>';
+				} 
+
+				print $pressErrors;
+				print $pressSuccess;
+
+				?>
+
+			</div>	
+
+
+
+			<form action="edit.php" method="POST" class="password-form">
+
+				<input type="hidden" name="id" value="<?= $user['id'] ?>">
+				
+				<div class="input-wrap">
+					<label for="password">lösenord</label>
+					<input type="password" name="update_password">
+				</div>	
+				<div class="input-wrap">	
+					<label for="confirm_password">bekräfta lösenord</label>
+					<input type="password" name="update_confirm_password"><br>
+				</div>
+
+				<input type="submit" value="Uppdatera lösenord">				
+
 			</form>
 
 			<?php endforeach; ?>
@@ -88,11 +123,8 @@
 				
 			<?php
 
-				foreach($errors as $error) {
-					print '<p>' . $error . '</p>';
-				} 
-
-				print $fel;
+				print $passErrors;
+				print $passSuccess;
 
 			?>
 

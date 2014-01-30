@@ -88,15 +88,10 @@ require 'functions/functions.php';
 					
 					<?php
 
-						// print_r($post);
-
 						$conversationId = $post['conversation_id'];
 						$replyId  	   = $post['post_id']; 
 						$username 	   = $post['username'];
 						$answerToNames = $post['answer_to_name'];
-
-						// print '<pre>';
-						// print_r($post);
 
 
 						print "<a href='profile.php?user=$username' class='sender'>" . $username . '</a>';
@@ -132,14 +127,10 @@ require 'functions/functions.php';
 								$replyName 	  = $replyPost['username'];
 								$answerToName = $replyPost['answer_to_name'];
 
-								//print_r($replyPost);
-
 								if($replyPost['answer_to_id'] != 0/* && $conversId != $replyToId*/) {	
 									print  "<a href='profile.php?user=$replyName' class='sender'>" . $replyPost['username'] . '</a>';
 									print  "<p><a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
-/*
-									print '<pre>';
-									print_r($replyPost); */
+
 								}
 							?>
 
@@ -170,7 +161,7 @@ require 'functions/functions.php';
 					<?php
 
 						printPageLinks($pages, $start, '');	
-			    	
+			    		
 				    ?>
 
 			    </div>

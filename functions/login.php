@@ -38,6 +38,8 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 	$user     = $_POST['user'];
 	$password = $_POST['password'];
 
+	$hashedPass = encrypt($password);
+
 	$currentUser = doesUserExist($user);
 
 	if(count($currentUser) == 0) {
@@ -50,7 +52,7 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 				$currentUser = $key;
 			}	
 
-		if($currentUser['mail'] == $user && $currentUser['password'] == $password) {
+		if($currentUser['mail'] == $user && $currentUser['password'] == $hashedPass) {
 
 			session_start();
 
@@ -131,12 +133,24 @@ function createUser($username, $mail, $password) {
 
 }
 
+function encrypt($password) {
 
+	$salt = 'sheisindeedthunderstorms';
+	$hashed = sha1(md5($salt.$password)).md5($password).sha1(md5(md5($password)));
+
+	return $hashed;
+
+}
+
+
+$succes = '';
 if(isset($_POST['create-username']) && isset($_POST['create-email']) && isset($_POST['create-password'])) {
 
 	$createUsername = $_POST['create-username'];
 	$createEmail 	= $_POST['create-email'];
 	$createPassword = $_POST['create-password'];
+
+	$hashedPass = encrypt($createPassword);
 
 	$doesUserExist   = doesUserExist($createEmail);
 	$isUsernameTaken = isUsernameTaken($createUsername);
@@ -151,13 +165,17 @@ if(isset($_POST['create-username']) && isset($_POST['create-email']) && isset($_
 
 		if(count($errors) == 0) {
 
-			createUser($createUsername, $createEmail, $createPassword);
+			$succes = 'Användaren har skapats!';
+
+			createUser($createUsername, $createEmail, $hashedPass);
 
 		}
 	}
 
 } else {
+
 	$errors = [];
+
 }
 
 

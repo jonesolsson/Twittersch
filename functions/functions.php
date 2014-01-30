@@ -215,12 +215,22 @@ if(isset($_POST['reply'])) {
 
 }
 
-function updateUserProfile($username, $mail, $password, $presentation, $id) {
+function updateUserProfile($username, $mail, $presentation, $id) {
 
 	$link = connection();
 
-	$query = "UPDATE users SET username='$username', mail='$mail', password='$password', presentation='$presentation'
+	$query = "UPDATE users SET username='$username', mail='$mail', presentation='$presentation'
 			  WHERE id='$id'";
+
+	mysqli_query($link, $query);
+
+}
+
+function updadteUserPassword($password, $id) {
+
+	$link = connection();
+
+	$query = "UPDATE users SET password='$password' WHERE id=$id";
 
 	mysqli_query($link, $query);
 
@@ -282,8 +292,25 @@ function isUsernameTakenUpdate($currentUsername, $newUsername) {
 
 }
 
-$fel = '';
+function validateUpdate($username, $mail) {
 
+	$errors = [];
+
+	if($username == '') {
+		$errors[] = 'Användarnamn saknas';
+	}
+
+	if(filter_var($mail, FILTER_VALIDATE_EMAIL) === false) {
+		$errors[] = 'Ogiltig E-post';
+	} elseif($mail == '') {
+		$errors[] =  'E-post saknas';
+	}
+
+	return $errors;
+}
+
+$pressErrors = '';
+$pressSuccess = '';
 //Uppdatera profildata
 if (isset($_POST['update_username'])) {
 
@@ -295,46 +322,60 @@ if (isset($_POST['update_username'])) {
 	$currentMail		= $_POST['current_mail'];	
 	$updateMail			= $_POST['update_mail'];
 
-	$updatePassword 	= $_POST['update_password'];
-	$updatePasswordConf = $_POST['update_confirm_password'];
-
 	$updatePresentation = $_POST['update_presentation'];
 
 	$isUsernameTaken = isUsernameTakenUpdate($currentUsername, $updateUsername);
 	$doesUserExist   = doesUserExistUpdate($currentMail, $updateMail);	
 
 	if(count($doesUserExist) != 0) {
-		$fel = 'Den här e-posten har redan ett registrerat konto';
+		$pressErrors = 'Den här e-posten har redan ett registrerat konto';
 	} elseif(count($isUsernameTaken) != 0) {
-		$fel = 'Användarnamnet är redan taget';
+		$pressErrors = 'Användarnamnet är redan taget';
  	} else {
 
- 		$errors = validateRegister($updateUsername, $updateMail, $updatePassword);	
+ 		$errors = validateUpdate($updateUsername, $updateMail);	
 
 		if(count($errors) == 0) {
 
-			if($updatePassword == $updatePasswordConf) {
+				updateUserProfile($updateUsername, $updateMail, $updatePresentation, $id);	
 
-				updateUserProfile($updateUsername, $updateMail, $updatePassword, $updatePresentation, $id);	
-
-			}
-
-			else {
-				print 'lösenorden matchar';
-			}
+				$pressSuccess = 'Profilen är uppdaterad!';
 
 		} 
 	}
 } 
 
-//Bilduppladdning
-function PostImgUrlToDB($url, $userId) {
+$passErrors = '';
+$passSuccess = '';
+//Uppdatera lösenord
+if(isset($_POST['update_password'])) {
 
-	$link = connection();
+	$id 				= $_POST['id'];
 
-	$query = "INSERT INTO images (url, user_id) VALUES ('$url', '$userId')";
+	$updatePassword 	= $_POST['update_password'];
+	$updatePasswordConf = $_POST['update_confirm_password'];
 
-	$result = mysqli_query($link, $query);
+	$hashedPass         = encrypt($updatePassword);
+	$hashedPassConf		= encrypt($updatePasswordConf);	
+
+	if($updatePassword != '' && $updatePasswordConf != '') {
+
+		if($hashedPass == $hashedPassConf) {
+
+			updadteUserPassword($hashedPass, $id);
+
+			$passSuccess = 'Lösenordet uppdaterat!';
+
+		} else {
+
+			$passErrors = 'Lösenorden matchar inte';
+
+		}
+
+	} else {
+
+		$passErrors = 'Båda fälten måste fyllas i';
+	}
 
 }
 
@@ -342,28 +383,9 @@ function UpdateImgUrlToDB($url, $userId) {
 
 	$link = connection();
 
-	$query = "UPDATE images SET url='$url' WHERE user_id='$userId'";
+	$query = "UPDATE users SET image_url='$url' WHERE id='$userId'";
 
 	$result = mysqli_query($link, $query);
-
-}
-
-function getProfileImg($username) {
-
-	$link = connection();
-
-	$query = "SELECT * FROM images INNER JOIN users ON images.user_id = users.id
-	          WHERE users.username='$username'";
-
-	$result = mysqli_query($link, $query);
-
-	$img = [];
-
-	while($row = mysqli_fetch_assoc($result)) {
-		$img[] = $row;
-	}
-
-	return $img;
 
 }
 
@@ -384,7 +406,7 @@ function getProfileImg($username) {
 
  				if( ! is_dir("uploads/$currentUsername")) {
 
- 					PostImgUrlToDB("uploads/$currentUsername/$name", $id);
+ 					UpdateImgUrlToDB("uploads/$currentUsername/$name", $id);
  					mkdir("uploads/$currentUsername");
  					move_uploaded_file($tmp, "uploads/$currentUsername/$name");	
 
@@ -495,7 +517,7 @@ if(isset($_GET['page'])) {
 //Skriver ut rätt antal länkar
 function printPageLinks($pages, $start, $username) {
 
-	for($i = 1; $i <= $pages; $i++) {
+	for($i = 1; $i <= $pages; $i++) {	
 
 		if($i == $start) {
 			print "<b>$i</b>";

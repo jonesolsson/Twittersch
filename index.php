@@ -68,6 +68,9 @@
 				<input type="password" name="create-password" placeholder="Lösenord"><br>
 				<input type="submit" value="Registrera">
 			</form>
+
+			<?= $succes; ?>
+
 		</div>
 
 		<div class="span4 error-wrap">
