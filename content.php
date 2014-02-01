@@ -13,12 +13,14 @@ require 'functions/functions.php';
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<!-- Stylesheets -->
+	<link rel="stylesheet" href="popeasy/main.css">	
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/ionicons.min.css" />
+	
 
 </head>
-<body>	
+<body>
 
 	<div class="container">
 
@@ -96,7 +98,7 @@ require 'functions/functions.php';
 
 						print "<a href='profile.php?user=$username' class='sender'>" . $username . '</a>';
 						if($answerToNames != '') {
-							print "<p><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
+							print "<p class='is-reply'><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
 							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 
 						} else {
@@ -172,11 +174,25 @@ require 'functions/functions.php';
 
 		</div>
 
+    <a class="modalLink" href="#modal1">Click Me</a>
+
+
+    <div class="overlay"></div>
+
+    <div id="modal1" class="modal">
+        <p class="closeBtn">Close</p>
+        <h2>Your Content Here</h2>
+    </div>
+        
+
+
 	</div>
 	
 <!-- JavaScript -->
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/script.js"></script>
+<script src="popeasy/jquery.modal.js"></script>
+<script src="popeasy/site.js"></script>
 
 </body>
 </html>	
