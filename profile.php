@@ -1,23 +1,10 @@
 <?php 
 	 require 'functions/functions.php';
+
+	 require 'head.php';
+
  ?>
-<!DOCTYPE html>
-<html>
-<head>
 
-	<title>Twittersch</title>
-	
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="popeasy/main.css">	
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="css/ionicons.min.css" />
-
-
-</head>
 <body>
 
 	<div class="container">
@@ -103,6 +90,7 @@
 							<ul>
 								<li><a href=".modal<?= $replyId ?>" class="show-conversation">Visa Konversation</a></li>
 								<li><a href="#" class="answer-to-post">Svara</a></li>
+								<li><a href="#" class="details">Detaljer</a></li>
 							</ul>								
 						</div>
 
@@ -179,6 +167,8 @@
 						</div>
 
 						<?php endforeach; ?>
+
+						<div class="detail-wrap hide"><?php print($post['posted']); ?></div>
 						
 					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
 						<!-- <input type="text" name="reply"> -->

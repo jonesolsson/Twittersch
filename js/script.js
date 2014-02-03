@@ -65,4 +65,31 @@ $( document ).ready(function() {
 
 	});
 
+	//Hantera Detaljer
+	$('.details').on('click', function(event){
+
+		var targetObj = $(event.target).parents();
+		var postDiv = targetObj[3];
+
+		$(postDiv).find('.detail-wrap').toggleClass('show');
+
+		event.preventDefault();
+
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });

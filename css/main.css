@@ -361,9 +361,11 @@ b {
 .posts-wrap .post-menu li {
   display: inline;
   float: right;
+  padding-left: 10px;
 }
 .posts-wrap .post-menu li:first-child {
   float: left;
+  padding: 0;
 }
 .post {
   width: 100%;

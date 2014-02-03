@@ -2,26 +2,11 @@
 
 require 'functions/functions.php';
 
+require 'head.php';
+
+
 ?>
-<!DOCTYPE html>
-<html>
-<head>
 
-	<title>Twittersch</title>
-	
-	<meta charset="UTF-8">
-
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="popeasy/main.css">	
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="css/ionicons.min.css" />
-	
-
-</head>
 <body>
 
 	<div class="container">
@@ -132,6 +117,7 @@ require 'functions/functions.php';
 							<ul>
 								<li><a href=".modal<?= $replyId ?>" class="show-conversation">Visa Konversation</a></li>
 								<li><a href="#" class="answer-to-post">Svara</a></li>
+								<li><a href="#" class="details">Detaljer</a></li>
 							</ul>								
 						</div>
 						
@@ -171,7 +157,6 @@ require 'functions/functions.php';
 							<?php endforeach; ?>
 
 								<form action="content.php" method="POST" class="modal-reply-form">
-									<!-- <input type="text" name="reply"> -->
 									<textarea name="reply"></textarea>
 									<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 									<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
@@ -208,8 +193,11 @@ require 'functions/functions.php';
 						</div>
 
 						<?php endforeach; ?>
+
+					<div class="detail-wrap hide"><?php print($post['posted']); ?></div>
 	
 					<form action="content.php" method="POST" class="reply-form hide">
+						<!-- <input type="text" name="reply"> -->
 						<textarea name="reply"></textarea>
 						<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">

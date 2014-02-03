@@ -1,19 +1,8 @@
-<?php require 'functions/functions.php'; ?>
-<!DOCTYPE html>
-<html>
-<head>
+<?php require 'functions/functions.php'; 
 
-	<title>Twittersch</title>
+	  require 'head.php';	
+?>
 
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" href="css/main.css" />
-	<link rel="stylesheet" href="css/ionicons.min.css" />
-
-</head>
 <body>
 
 <div class="container">

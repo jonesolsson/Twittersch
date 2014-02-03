@@ -79,7 +79,8 @@
             $('.' + options.videoClass).attr('src',options.video);
             modals.hide();
             currentModal.css({
-                top:$(window).height() /2 - currentModal.outerHeight() /2 + $(window).scrollTop(),
+                // top:$(window).height() /2 - currentModal.outerHeight() /2 + $(window).scrollTop(),
+                top:200,
                 left:$(window).width() /2 - currentModal.outerWidth() /2 + $(window).scrollLeft()
             });
                 
