@@ -292,6 +292,13 @@ b {
 .tweet-form-wrap .span2 h1 {
   text-align: right;
 }
+.tweet-form-wrap .span2 .user-facts {
+  text-align: right;
+  margin-top: 10px;
+}
+.tweet-form-wrap .span2 .user-facts p {
+  margin: 0;
+}
 .tweet-form-wrap .tweet-form {
   width: 100%;
   margin: 0;
@@ -397,6 +404,11 @@ b {
   margin-top: -12.5px;
   z-index: -10;
 }
+.modal-post {
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  padding: 15px 10px;
+}
 .reply-post {
   width: 100%;
   margin: 0 auto;
@@ -425,7 +437,7 @@ b {
   margin-bottom: 15px;
 }
 .profile-press .profile-pic img {
-  width: 200px;
+  width: 100%;
 }
 .profile-posts .pagecount {
   float: right;

@@ -129,6 +129,27 @@ function getPostsToProfile($start) {
 
 }
 
+function getLatestPostFromUser($user) {
+
+	$link = connection();
+
+	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id
+			  WHERE users.username = '$user' ORDER BY posted DESC LIMIT 1";
+
+	$result = mysqli_query($link, $query);
+
+	$posts = [];
+
+	while($row = mysqli_fetch_assoc($result)) {
+
+		$posts[] = $row;
+
+	}
+
+	return $posts;
+
+}
+
 //Skriva ett svar till en post
 function writeReplyPostToDB($userId, $content, $aswerToId, $answerToName, $conversId) {
 
@@ -172,6 +193,27 @@ function updatePostToConversation($conversId) {
 			  WHERE id=$conversId";
 
 	mysqli_query($link, $query);
+
+}
+
+function getConversationToModal($conversId) {
+
+	$link = connection();
+
+	$query = "SELECT *, posts.id AS post_id FROM posts INNER JOIN users ON posts.user_id = users.id
+		     WHERE conversation_id='$conversId' ORDER BY posted ASC";
+
+	$result = mysqli_query($link, $query);
+
+	$posts = [];
+
+	while($row = mysqli_fetch_assoc($result)) {
+
+		$posts[] = $row;
+
+	}
+
+	return $posts;
 
 }
 

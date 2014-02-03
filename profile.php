@@ -11,6 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<!-- Stylesheets -->
+	<link rel="stylesheet" href="popeasy/main.css">	
 	<link rel="stylesheet" href="css/bootstrap.min.css" />
 	<link rel="stylesheet" href="css/main.css" />
 	<link rel="stylesheet" href="css/ionicons.min.css" />
@@ -100,10 +101,61 @@
 
 						<div class="post-menu">
 							<ul>
-								<li><a href="#" class="show-conversation">Visa Konversation</a></li>
+								<li><a href=".modal<?= $replyId ?>" class="show-conversation">Visa Konversation</a></li>
 								<li><a href="#" class="answer-to-post">Svara</a></li>
 							</ul>								
 						</div>
+
+						<!-- Konversations modal -->	
+<!-- 						<div id="modal<?= $replyId ?>" class="modal"> -->
+						<div class="conversation-modal modal modal<?= $replyId ?>">
+				    		<p class="closeBtn">Close</p>
+													
+							<?php
+
+							$modalPosts = getConversationToModal($conversationId);	
+
+							foreach ($modalPosts as $modalpost) : ?> 
+									
+								<div class="modal-post">
+								
+								<?php
+
+									$modalpostUsername = $modalpost['username'];
+									$modalpostAnswerName = $modalpost['answer_to_name'];
+
+
+									print "<a href='profile.php?user=$modalpostUsername' class='sender'>" . $username . '</a>';
+									if($modalpostAnswerName != '') {
+										print "<p class='is-reply'><a href='profile.php?user=$modalpostAnswerName'>" . '@' . $modalpostAnswerName . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+
+									} else {
+										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
+
+									}
+																													
+
+								?>								
+
+								</div>	
+
+							<?php endforeach; ?>
+
+								<form action="profile.php?user=<?= $username ?>" method="POST" class="modal-reply-form">
+									<!-- <input type="text" name="reply"> -->
+									<textarea name="reply"></textarea>
+									<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
+									<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
+									<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+									<input type="hidden" name="reply_id" value="<?= $replyId ?>">
+									
+									<div class="test">
+										<i class="ion-paper-airplane"></i>
+										<input type="submit" value="">
+									</div>
+								</form>								
+
+			   			</div>
 
 						<?php foreach(getReplayPostsFromDB($post['post_id']) as $replyPost) : ?>
 						<div class="reply-post hide">
@@ -131,6 +183,7 @@
 					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
 						<!-- <input type="text" name="reply"> -->
 						<textarea name="reply"></textarea>
+						<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
 						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
@@ -160,11 +213,16 @@
 
 		</div>
 
+		<!-- Modal overlay  -->
+	    <div class="overlay"></div>
+
 	</div>
 
 <!-- JavaScript -->
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/script.js"></script>
+<script src="popeasy/jquery.modal.js"></script>
+<script src="popeasy/site.js"></script>
 
 </body>
 </html>	

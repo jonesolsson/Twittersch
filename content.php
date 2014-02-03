@@ -8,6 +8,8 @@ require 'functions/functions.php';
 <head>
 
 	<title>Twittersch</title>
+	
+	<meta charset="UTF-8">
 
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -46,6 +48,24 @@ require 'functions/functions.php';
 				?>
 
 				</h1>
+				
+				<div class="user-facts">						
+					<p>
+						Har gjort <?= countUsersPosts($username); ?> inlägg och
+					</p>
+
+					<p>
+						<?php 
+
+						foreach (getLatestPostFromUser($username) as $latestPost) {
+							print 'det senaste gjordes ' . date('j/M-Y', strtotime($latestPost['posted']));							
+						}
+
+
+						?>
+
+					</p>
+				</div>
 
 			</div>
 
@@ -110,14 +130,63 @@ require 'functions/functions.php';
 
 						<div class="post-menu">
 							<ul>
-								<li><a href="#" class="show-conversation">Visa Konversation</a></li>
+								<li><a href=".modal<?= $replyId ?>" class="show-conversation">Visa Konversation</a></li>
 								<li><a href="#" class="answer-to-post">Svara</a></li>
 							</ul>								
 						</div>
 						
 
+						<!-- Konversations modal -->	
+						<!-- <div id="modal<?= $replyId ?>" class="modal"> -->
+						<div class="conversation-modal modal modal<?= $replyId ?>">
+				    		<p class="closeBtn">Close</p>
+													
+							<?php
+
+							$modalPosts = getConversationToModal($conversationId);	
+
+							foreach ($modalPosts as $modalpost) : ?> 
+									
+								<div class="modal-post">
+								
+								<?php
+
+									$modalpostUsername = $modalpost['username'];
+									$modalpostAnswerName = $modalpost['answer_to_name'];
+
+									print "<a href='profile.php?user=$modalpostUsername' class='sender'>" . $username . '</a>';
+									if($modalpostAnswerName != '') {
+										print "<p class='is-reply'><a href='profile.php?user=$modalpostAnswerName'>" . '@' . $modalpostAnswerName . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+
+									} else {
+										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
+
+									}
+																													
+
+								?>								
+
+								</div>
+
+							<?php endforeach; ?>
+
+								<form action="content.php" method="POST" class="modal-reply-form">
+									<!-- <input type="text" name="reply"> -->
+									<textarea name="reply"></textarea>
+									<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
+									<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
+									<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+									<input type="hidden" name="reply_id" value="<?= $replyId ?>">
+									
+									<div class="test">
+										<i class="ion-paper-airplane"></i>
+										<input type="submit" value="">
+									</div>
+								</form>	
+
+			   			</div>
 						
-						<!-- IN MED BACKUP -->	
+	
 						<?php foreach(getReplayPostsFromDB($replyId) as $replyPost) : ?>	
 
 						<div class="reply-post hide">
@@ -139,9 +208,8 @@ require 'functions/functions.php';
 						</div>
 
 						<?php endforeach; ?>
-
+	
 					<form action="content.php" method="POST" class="reply-form hide">
-						<!-- <input type="text" name="reply"> -->
 						<textarea name="reply"></textarea>
 						<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
@@ -174,17 +242,8 @@ require 'functions/functions.php';
 
 		</div>
 
-    <a class="modalLink" href="#modal1">Click Me</a>
-
-
-    <div class="overlay"></div>
-
-    <div id="modal1" class="modal">
-        <p class="closeBtn">Close</p>
-        <h2>Your Content Here</h2>
-    </div>
-        
-
+		<!-- Modal overlay  -->
+	    <div class="overlay"></div>
 
 	</div>
 	

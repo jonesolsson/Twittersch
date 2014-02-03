@@ -1,7 +1,4 @@
-$( document ).ready(function() {
-
-
-	
+$( document ).ready(function() {	
 
 	//Styr vart "Visa Konversation" ska synas
 	var pDiv = $('.post');
@@ -19,12 +16,9 @@ $( document ).ready(function() {
 
 		if($('.reply-post').closest(pDiv[i]).length == 0) {
 			$(pDiv[i]).find('.show-conversation').addClass('modalLink');
-			$(pDiv[i]).find('.show-conversation').attr('href', '#modal1');
 		}
 
 	}
-
-
 
 	//Hantera Visa/dölj konversation
 	$('.show-conversation').on('click', function(event){
@@ -36,7 +30,7 @@ $( document ).ready(function() {
 
 		if($('.reply-post').closest(postDiv).length == 0) {
 			
-
+			
 
 		} else {
 
@@ -49,7 +43,6 @@ $( document ).ready(function() {
 			} else {
 				$(this).html('Visa Konversation');
 			}
-
 
 		}
 
@@ -71,8 +64,5 @@ $( document ).ready(function() {
 		event.preventDefault();
 
 	});
-
-
-
 
 });
