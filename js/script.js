@@ -79,7 +79,7 @@ $( document ).ready(function() {
 
 
 	
-	//Flygplan --> 'VISKA'
+	//Flygplan --> 'VISKA' @ huvudformulär
 	$('.tweet-btn').mouseover(function(event) {
  		t = event.target;
  		if(t.tagName == 'INPUT') {
@@ -91,8 +91,45 @@ $( document ).ready(function() {
 		$(t).val('');
 	});
 
+	//Flygplan --> 'VISKA' @ feed-formilär
+	var planeBtn = $('.test');
+
+	planeBtn.mouseover(function(event){
+
+		t = event.target;
+		tParent = $(t).parent();
+
+		if(t.tagName == 'INPUT') {
+			$(t).val('Viska');
+			$(t).css('color', '#fff');
+
+			plane = tParent.find('.ion-paper-airplane');
+			$(plane).css('z-index', '-10');
+		}
+	})
+	.mouseout(function(){
+		$(t).val('');
+		$(plane).css('z-index', '');
+	});
 	
 
+	// BILDCENTRERING
+	$(function(){
+	    centerImageVertically();
+	    $(window).resize(function() {
+	        centerImageVertically();
+	    });
+	    function centerImageVertically() {
+	        var imgframes = $('.profile-pic img');
+	        imgframes.each(function(i){
+	            var imgVRelativeOffset = ($(this).height() - $(this).parent().height()) / 2;
+	            $(this).css({
+	                'position': 'absolute',
+	                'top': imgVRelativeOffset * -1
+	            });
+	        });
+	    }
+	});
 
 
 

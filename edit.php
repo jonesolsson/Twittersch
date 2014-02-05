@@ -5,11 +5,24 @@
 	  require 'head.php';	
 ?>
 
-<body>
+<body id="edit">
 
 <?php require 'navigation.php'; ?>
 
 <div class="container">
+
+	<div class="row-fluid headline">
+		
+		<div class="span3"></div>
+
+		<div class="span6">
+			<h2>Redigera profil</h2>			
+		</div>
+
+		<div class="span3"></div>	
+
+	</div>
+
 
 	<div class="row-fluid edit">	
 
@@ -27,19 +40,19 @@
 				}
 				
 
-			?>						
+			?>					
 
 			<form enctype="multipart/form-data" action="edit.php" method="POST">
 
 				<div class="change-pic">	
 
-					<div class="profile-pic">
-					
-						<img src="<?= sanitize($path) ?>" alt="profile-picture">	
+					<div class="upload-picture">
+						<input type="file" name="upload">								
+					</div>	
 
-					</div>
-
-					<input type="file" name="upload">					
+					<div class="profile-pic">					
+						<img src="<?= sanitize($path) ?>" alt="profile-picture">
+					</div>		
 
 				</div>	
 				
@@ -56,20 +69,11 @@
 					<label for="mail">e-post</label>
 					<input type="mail" name="update_mail" value="<?= sanitize($user['mail']); ?>">
 				</div>
-
-<!-- 				<div class="input-wrap">
-					<label for="password">lösenord</label>
-					<input type="password" name="update_password">
-				</div>	
-				<div class="input-wrap">	
-					<label for="confirm_password">bekräfta lösenord</label>
-					<input type="password" name="update_confirm_password"><br>
-				</div> -->
 				
 				<div class="presentation">
 					<label for="presentation">presentation</label>
 					<textarea name="update_presentation" cols="30" rows="10"><?= sanitize($user['presentation']); ?></textarea>
-					<input type="submit" value="uppdatera">
+					<input type="submit" value="Uppdatera Presentation">
 				</div>
 				
 			</form>

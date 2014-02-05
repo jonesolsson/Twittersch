@@ -6,12 +6,12 @@
 	<div class="span9 nav-wrap">
 		
 		<ul class="profile-nav">
-			<li><a href="profile.php?user=<?= $username ?>"><i class="ion-person"></i>Profil</a></li>
+			<li><a href="profile.php?user=<?= $username ?>" id="profileLink"><i class="ion-person"></i>Profil</a></li>
 		</ul>
 
 		<ul class="main-nav">			
-			<li><a href="content.php"><i class="ion-home"></i>Feed</a></li>
-			<li><a href="edit.php"><i class="ion-edit"></i>Redigera</a></li>
+			<li><a href="content.php" id="homeLink"><i class="ion-home"></i>Feed</a></li>
+			<li><a href="edit.php" id="editLink"><i class="ion-edit"></i>Redigera</a></li>
 			<li><a href="logout.php"><i class="ion-log-out"></i>Logge Ut</a></li>
 		</ul>
 

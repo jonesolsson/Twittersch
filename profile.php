@@ -5,7 +5,7 @@
 
  ?>
 
-<body>
+<body id="profile">
 
 		<?php
 
@@ -55,7 +55,7 @@
 				</p>
 			</div>					
 
-			<div class="span3">
+			<div class="span3 profile">
 
 				<div class="profile-pic">					
 
@@ -85,9 +85,12 @@
 						$username 		= $post['username'];
 						$answerToNames  = $post['answer_to_name'];
 
-						print "<a href='profile.php?user=sanitize($username)'>" . sanitize($username) . '</a><br>';
+						$sanUsername 	= sanitize($username);
+						$sanAswerName	= sanitize($answerToNames);     
+
+						print "<a href='profile.php?user=$sanUsername' class='sender'>" . sanitize($username) . '</a><br>';
 						if($answerToNames != '') {
-							print "<p><a href='profile.php?user=sanitize($answerToNames)'>" . '@' . sanitize($answerToNames) . '</a> ' . linkToAnchor($post['content']) . '</p>';
+							print "<p><a href='profile.php?user=$sanAswerName'>" . '@' . sanitize($answerToNames) . '</a> ' . linkToAnchor($post['content']) . '</p>';
 							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 						} else {
 							// print linkToAnchor($post['content']) . '<br><br>';
@@ -112,7 +115,7 @@
 						<!-- Konversations modal -->	
 <!-- 						<div id="modal<?= $replyId ?>" class="modal"> -->
 						<div class="conversation-modal modal modal<?= $replyId ?>">
-				    		<p class="closeBtn">Close</p>
+				    		<p class="closeBtn">x</p>
 													
 							<?php
 
@@ -127,10 +130,13 @@
 									$modalpostUsername = $modalpost['username'];
 									$modalpostAnswerName = $modalpost['answer_to_name'];
 
+									$sanModalpostUsername = sanitize($modalpostUsername);
+									$sanModalpostAnswerName = sanitize($modalpostAnswerName);
 
-									print "<a href='profile.php?user=sanitize($modalpostUsername)' class='sender'>" . sanitize($username) . '</a>';
+
+									print "<a href='profile.php?user=$sanModalpostUsername' class='sender'>" . sanitize($username) . '</a>';
 									if($modalpostAnswerName != '') {
-										print "<p class='is-reply'><a href='profile.php?user=sanitize($modalpostAnswerName)'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+										print "<p class='is-reply'><a href='profile.php?user=$sanModalpostAnswerName)'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
 
 									} else {
 										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
@@ -170,11 +176,14 @@
 								$replyName 	  = $replyPost['username'];
 								$answerToName = $replyPost['answer_to_name'];
 
+								$sanAnswerToName = sanitize($answerToName);
+								$sanReplyName	 = sanitize($replyName);
+
 
 								if($replyPost['answer_to_id'] != 0) {
 								
-									print  sanitize($replyPost['username']) . '<br>';
-									print  "<a href='profile.php?user=sanitize($answerToName)'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']);
+									print  "<a href='profile.php?user=$sanReplyName' class='sender'>" . sanitize($replyPost['username']) . '</a>';
+									print  "<p><a href='profile.php?user=$sanAnswerToName'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
 
 								}
 							?>							

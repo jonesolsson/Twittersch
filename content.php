@@ -7,7 +7,7 @@ require 'head.php';
 
 ?>
 
-<body>
+<body id="home">
 
 	<?php require 'navigation.php'; ?>
 
@@ -36,14 +36,14 @@ require 'head.php';
 				
 				<div class="user-facts">						
 					<p>
-						Har gjort <?= countUsersPosts($username); ?> inlägg och
+						Har gjort <?= countUsersPosts($username); ?> viskningar
 					</p>
 
 					<p>
 						<?php 
 
 						foreach (getLatestPostFromUser($username) as $latestPost) {
-							print 'det senaste gjordes ' . date('j/M-Y', strtotime($latestPost['posted']));							
+							print 'den senaste gjordes ' . date('j/M-Y', strtotime($latestPost['posted']));							
 						}
 
 
@@ -57,7 +57,7 @@ require 'head.php';
 			<div class="span5">			
 
 				<form action="content.php" method="POST" class="tweet-form">
-					<textarea name="content" placeholder="Skriv en viskning..."></textarea>
+					<textarea name="content" placeholder="Dela en viskning..."></textarea>
 
 					<div class="errors">
 						<?php
@@ -96,10 +96,13 @@ require 'head.php';
 						$username 	   = $post['username'];
 						$answerToNames = $post['answer_to_name'];
 
+						$sanUsername 	= sanitize($username);
+						$sanAswerName	= sanitize($answerToNames);   						
 
-						print "<a href='profile.php?user=$username' class='sender'>" . $username . '</a>';
+
+						print "<a href='profile.php?user=$sanUsername' class='sender'>" . sanitize($username) . '</a>';
 						if($answerToNames != '') {
-							print "<p class='is-reply'><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
+							print "<p class='is-reply'><a href='profile.php?user=$sanAswerName'>" . '@' . $sanAswerName . '</a> ' . linkToAnchor($post['content']) . '</p>';
 							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 
 						} else {
@@ -121,7 +124,7 @@ require 'head.php';
 						<!-- Konversations modal -->	
 						<!-- <div id="modal<?= $replyId ?>" class="modal"> -->
 						<div class="conversation-modal modal modal<?= $replyId ?>">
-				    		<p class="closeBtn">Close</p>
+				    		<p class="closeBtn">x</p>
 													
 							<?php
 
@@ -136,9 +139,12 @@ require 'head.php';
 									$modalpostUsername = $modalpost['username'];
 									$modalpostAnswerName = $modalpost['answer_to_name'];
 
-									print "<a href='profile.php?user=$modalpostUsername' class='sender'>" . $username . '</a>';
+									$sanModalpostUsername = sanitize($modalpostUsername);
+									$sanModalpostAnswerName = sanitize($modalpostAnswerName);
+
+									print "<a href='profile.php?user=$sanModalpostUsername' class='sender'>" . $sanModalpostUsername . '</a>';
 									if($modalpostAnswerName != '') {
-										print "<p class='is-reply'><a href='profile.php?user=sanitize($modalpostAnswerName)'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+										print "<p class='is-reply'><a href='profile.php?user=$sanModalpostAnswerName'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
 
 									} else {
 										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
@@ -179,9 +185,12 @@ require 'head.php';
 								$replyName 	  = $replyPost['username'];
 								$answerToName = $replyPost['answer_to_name'];
 
+								$sanAnswerToName = sanitize($answerToName);
+								$sanReplyName = sanitize($replyName);
+
 								if($replyPost['answer_to_id'] != 0/* && $conversId != $replyToId*/) {	
-									print  "<a href='profile.php?user=sanitize($replyName)' class='sender'>" . sanitize($replyPost['username']) . '</a>';
-									print  "<p><a href='profile.php?user=sanitize($answerToName)'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
+									print  "<a href='profile.php?user=$sanReplyName' class='sender'>" . sanitize($replyPost['username']) . '</a>';
+									print  "<p><a href='profile.php?user=$sanAnswerToName'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
 
 								}
 							?>
