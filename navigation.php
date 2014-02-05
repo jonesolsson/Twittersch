@@ -1,10 +1,22 @@
-
+<?php $username = $_SESSION['username']; ?>
 <div class="row-fluid nav">
-	
-	<ul>
-		<li><a href="content.php">hem</a></li>
-		<li><a href="edit.php">redigera profil</a></li>
-		<li><a href="logout.php">logge ut</a></li>
-	</ul>
+		
+	<div class="span2"></div>	
+
+	<div class="span9 nav-wrap">
+		
+		<ul class="profile-nav">
+			<li><a href="profile.php?user=<?= $username ?>"><i class="ion-person"></i>Profil</a></li>
+		</ul>
+
+		<ul class="main-nav">			
+			<li><a href="content.php"><i class="ion-home"></i>Feed</a></li>
+			<li><a href="edit.php"><i class="ion-edit"></i>Redigera</a></li>
+			<li><a href="logout.php"><i class="ion-log-out"></i>Logge Ut</a></li>
+		</ul>
+
+	</div>
+
+	<div class="span1"></div>
 
 </div>

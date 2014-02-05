@@ -78,12 +78,20 @@ $( document ).ready(function() {
 	});
 
 
+	
+	//Flygplan --> 'VISKA'
+	$('.tweet-btn').mouseover(function(event) {
+ 		t = event.target;
+ 		if(t.tagName == 'INPUT') {
+ 			$(t).val('Viska');
+ 			$(t).css('color', '#fff');
+ 		}
+	})
+	.mouseout(function(){
+		$(t).val('');
+	});
 
-
-
-
-
-
+	
 
 
 

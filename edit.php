@@ -1,13 +1,15 @@
-<?php require 'functions/functions.php'; 
+<?php session_start(); if( ! empty($_SESSION['user'])) { 
+
+	  require 'functions/functions.php'; 
 
 	  require 'head.php';	
 ?>
 
 <body>
 
-<div class="container">
+<?php require 'navigation.php'; ?>
 
-	<?php require 'navigation.php'; ?>
+<div class="container">
 
 	<div class="row-fluid edit">	
 
@@ -33,7 +35,7 @@
 
 					<div class="profile-pic">
 					
-						<img src="<?= $path ?>" alt="profile-picture">	
+						<img src="<?= sanitize($path) ?>" alt="profile-picture">	
 
 					</div>
 
@@ -134,3 +136,10 @@
 
 </body>
 </html>
+
+<?php
+
+	} else {	
+		header('Location: index.php');
+	}
+?>

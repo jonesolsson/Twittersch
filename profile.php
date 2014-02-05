@@ -7,14 +7,25 @@
 
 <body>
 
-	<div class="container">
-
 		<?php
 
 	 	if( ! empty($_SESSION['user'])) {
  			require 'navigation.php';
 
- 		}  
+ 		}  else { ?>
+			
+			<div class="row-fluid">	
+				<div class="span12 log-in-text-wrap">
+				
+				<?= '<a href="index.php">' . 'Logga in ' . '</a>' . 'för att vara med och viska'; ?>
+	
+				</div>	
+			</div>
+ 	    <?php }  ?>
+
+ 	    	<div class="container">
+
+		<?php
 
  		$currentUser = getCurrentUserName($_GET['user']);
 
@@ -38,7 +49,7 @@
 			<div class="span3"></div>		
 
 			<div class="span3 user-press">
-				<h1><?= $_GET['user']; ?></h1>
+				<h1><?= sanitize($_GET['user']); ?></h1>
 				<p>
 					<?= $userPresentation ?>
 				</p>
@@ -48,7 +59,7 @@
 
 				<div class="profile-pic">					
 
-					<img src="<?= $path ?>" alt="profile-picture">
+					<img src="<?= sanitize($path) ?>" alt="profile-picture">
 
 				</div>
 
@@ -74,9 +85,9 @@
 						$username 		= $post['username'];
 						$answerToNames  = $post['answer_to_name'];
 
-						print "<a href='profile.php?user=$username'>" . $username . '</a><br>';
+						print "<a href='profile.php?user=sanitize($username)'>" . sanitize($username) . '</a><br>';
 						if($answerToNames != '') {
-							print "<p><a href='profile.php?user=$answerToNames'>" . '@' . $answerToNames . '</a> ' . linkToAnchor($post['content']) . '</p>';
+							print "<p><a href='profile.php?user=sanitize($answerToNames)'>" . '@' . sanitize($answerToNames) . '</a> ' . linkToAnchor($post['content']) . '</p>';
 							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";
 						} else {
 							// print linkToAnchor($post['content']) . '<br><br>';
@@ -85,6 +96,8 @@
 						}
 						
 						?>
+						
+						<?php if( ! empty($_SESSION['user'])) { ?>
 
 						<div class="post-menu">
 							<ul>
@@ -93,6 +106,8 @@
 								<li><a href="#" class="details">Detaljer</a></li>
 							</ul>								
 						</div>
+
+						<?php } ?>
 
 						<!-- Konversations modal -->	
 <!-- 						<div id="modal<?= $replyId ?>" class="modal"> -->
@@ -113,9 +128,9 @@
 									$modalpostAnswerName = $modalpost['answer_to_name'];
 
 
-									print "<a href='profile.php?user=$modalpostUsername' class='sender'>" . $username . '</a>';
+									print "<a href='profile.php?user=sanitize($modalpostUsername)' class='sender'>" . sanitize($username) . '</a>';
 									if($modalpostAnswerName != '') {
-										print "<p class='is-reply'><a href='profile.php?user=$modalpostAnswerName'>" . '@' . $modalpostAnswerName . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+										print "<p class='is-reply'><a href='profile.php?user=sanitize($modalpostAnswerName)'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
 
 									} else {
 										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
@@ -134,7 +149,7 @@
 									<textarea name="reply"></textarea>
 									<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 									<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
-									<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+									<input type="hidden" name="answer_to_name" value="<?= sanitize($username) ?>">
 									<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 									
 									<div class="test">
@@ -158,8 +173,8 @@
 
 								if($replyPost['answer_to_id'] != 0) {
 								
-									print  $replyPost['username'] . '<br>';
-									print  "<a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']);
+									print  sanitize($replyPost['username']) . '<br>';
+									print  "<a href='profile.php?user=sanitize($answerToName)'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']);
 
 								}
 							?>							
@@ -168,14 +183,21 @@
 
 						<?php endforeach; ?>
 
-						<div class="detail-wrap hide"><?php print($post['posted']); ?></div>
+						<div class="detail-wrap hide">
+
+							<div class="thumbnail-img">
+								<img src="<?= sanitize($post['image_url']); ?>">
+							</div>
 						
-					<form action="profile.php?user=<?= $username ?>" method="POST" class="reply-form hide">
-						<!-- <input type="text" name="reply"> -->
+							<p><?= sanitize($post['username']) . ' viskade detta den ' . date('j/M-Y', strtotime($post['posted'])); ?></p>
+
+						</div>
+						
+					<form action="profile.php?user=<?= sanitize($username) ?>" method="POST" class="reply-form hide">
 						<textarea name="reply"></textarea>
 						<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
-						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+						<input type="hidden" name="answer_to_name" value="<?= sanitize($username) ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 						
 						<div class="test">

@@ -59,6 +59,7 @@ if(isset($_POST['user']) && isset($_POST['password'])) {
 			$_SESSION['login']   = true;
 			$_SESSION['user']    = $user;
 			$_SESSION['user_id'] = $currentUser['id'];
+			$_SESSION['username'] = $currentUser['username'];
 			
 			header('Location: content.php');
 			

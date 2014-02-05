@@ -9,15 +9,15 @@ require 'head.php';
 
 <body>
 
-	<div class="container">
+	<?php require 'navigation.php'; ?>
 
-		<?php require 'navigation.php'; ?>
+	<div class="container">		
 
 		<div class="row-fluid tweet-form-wrap">
 			
-			<div class="span3"></div>
+			<!-- <div class="span1"></div> -->
 
-			<div class="span2">
+			<div class="span3 content-username">
 				
 				<h1>
 				
@@ -54,10 +54,10 @@ require 'head.php';
 
 			</div>
 
-			<div class="span3">			
+			<div class="span5">			
 
 				<form action="content.php" method="POST" class="tweet-form">
-					<textarea name="content"></textarea>
+					<textarea name="content" placeholder="Skriv en viskning..."></textarea>
 
 					<div class="errors">
 						<?php
@@ -76,11 +76,7 @@ require 'head.php';
 			</div>
 
 			
-			<div class="span3">
-				
-
-
-			</div>
+			<div class="span3"></div>
 
 		</div>
 
@@ -142,7 +138,7 @@ require 'head.php';
 
 									print "<a href='profile.php?user=$modalpostUsername' class='sender'>" . $username . '</a>';
 									if($modalpostAnswerName != '') {
-										print "<p class='is-reply'><a href='profile.php?user=$modalpostAnswerName'>" . '@' . $modalpostAnswerName . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
+										print "<p class='is-reply'><a href='profile.php?user=sanitize($modalpostAnswerName)'>" . '@' . sanitize($modalpostAnswerName) . '</a> ' . linkToAnchor($modalpost['content']) . '</p>';
 
 									} else {
 										print '<p>' . linkToAnchor($modalpost['content']) . '</p>';
@@ -160,7 +156,7 @@ require 'head.php';
 									<textarea name="reply"></textarea>
 									<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 									<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
-									<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+									<input type="hidden" name="answer_to_name" value="<?= sanitize($username) ?>">
 									<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 									
 									<div class="test">
@@ -184,8 +180,8 @@ require 'head.php';
 								$answerToName = $replyPost['answer_to_name'];
 
 								if($replyPost['answer_to_id'] != 0/* && $conversId != $replyToId*/) {	
-									print  "<a href='profile.php?user=$replyName' class='sender'>" . $replyPost['username'] . '</a>';
-									print  "<p><a href='profile.php?user=$answerToName'>" . '@' . $answerToName . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
+									print  "<a href='profile.php?user=sanitize($replyName)' class='sender'>" . sanitize($replyPost['username']) . '</a>';
+									print  "<p><a href='profile.php?user=sanitize($answerToName)'>" . '@' . sanitize($answerToName) . '</a>: ' . linkToAnchor($replyPost['content']) . '</p>';
 
 								}
 							?>
@@ -194,14 +190,23 @@ require 'head.php';
 
 						<?php endforeach; ?>
 
-					<div class="detail-wrap hide"><?php print($post['posted']); ?></div>
+					<!-- DETALJINFORMATION -->
+					<div class="detail-wrap hide">
+
+						<div class="thumbnail-img">
+							<img src="<?= sanitize($post['image_url']); ?>">
+						</div>
+					
+						<p><?= $post['username'] . ' viskade detta den ' . date('j/M-Y', strtotime($post['posted'])); ?></p>
+
+						</div>
 	
 					<form action="content.php" method="POST" class="reply-form hide">
 						<!-- <input type="text" name="reply"> -->
 						<textarea name="reply"></textarea>
 						<input type="hidden" name="current_conversation_id" value="<?= $conversationId ?>">
 						<input type="hidden" name="conversation_id" value="<?php if($conversationId == 0){ print $replyId; } else { print $conversationId; } ?>">
-						<input type="hidden" name="answer_to_name" value="<?= $username ?>">
+						<input type="hidden" name="answer_to_name" value="<?= sanitize($username) ?>">
 						<input type="hidden" name="reply_id" value="<?= $replyId ?>">
 						
 						<div class="test">

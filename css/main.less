@@ -8,19 +8,42 @@
 ======================================================================================================================================*/
 
 .nav {
+	background-color: @main-color;
 
-	padding: 20px;
-	
-	ul {
-		float: right;
+	.nav-wrap {
+		margin: 0 auto;
+		padding: 20px 0;
 	}
 
+	.profile-nav {
+		float: left;
+		margin: 0;
+	}
+	
+	.main-nav {
+		float: right;
+		margin: 0;
+	}
+	
 	ul li {
 		display: inline;
+		padding: 0 0 0 25px;
 	}
 
 	a {
-		padding: 0 0 0 10px;
+
+		color: #fff;
+		font-size: 18px;
+
+		&:hover {
+			padding-bottom: 12px;	
+			border-bottom: 3px solid #fff;		
+		}
+
+	}
+
+	i {
+		padding-right: 4px;
 	}
 
 }
@@ -31,18 +54,33 @@
 //INDEX PAGE
 
 .index-wrap {
-	margin-top: 250px;
+    width: 100%; 
+	background-color: rgba(255, 125, 70, 1);
 }
 
-.login-wrap,
+.login-wrap-row {
+	margin-top: 200px;
+}
+
+.register-wrap-row {
+	margin-top: 30px;
+}
+
 .register-wrap {
+	input[type="submit"] {
+		width: 100%;
+		padding: 15px 0;
+		color: #fff;
+		background-color: rgba(255, 125, 70, 1);
+		border: none;
+		font-size: 16px;
 
-	form {
-		width: 80%;
-		margin: 0 auto;
-		font-size: 18px;
+		&:hover {
+			background-color: #fff;
+			color: rgba(255, 125, 70, 1);
+			border: 1px solid rgba(255, 125, 70, 1);
+		}
 	}
-
 	input[type="text"],
 	input[type="password"],
 	input[type="email"] {
@@ -51,17 +89,46 @@
 		font-size: 100%;
 		height: 40px;
 		padding: 0 0 0 5px;
-		border: 2px solid;
+		border: 1px solid rgba(255, 125, 70, 1);
 		margin-bottom: 10px;
 	}
+}
 
+.login-wrap {
 	input[type="submit"] {
 		width: 100%;
 		padding: 15px 0;
-		background-color: #000;
-		color: #fff;
-		border: 2px solid #000;
+		background-color: #fff;
+		color: rgba(255, 125, 70, 1);
+		border: 1px solid;
 		font-size: 16px;
+
+		&:hover {
+			background-color: rgba(255, 125, 70, 1);
+			color: #fff;
+			border: 1px solid #FFF;
+		}
+	}	
+	input[type="text"],
+	input[type="password"],
+	input[type="email"] {
+		float: right;
+		width: 100%;
+		font-size: 100%;
+		height: 40px;
+		padding: 0 0 0 5px;
+		border: 1px solid #fff;
+		margin-bottom: 10px;
+	}
+}
+
+.login-wrap,
+.register-wrap {
+
+	form {
+		width: 70%;
+		margin: 0 auto;
+		font-size: 18px;
 	}
 
 }
@@ -71,17 +138,27 @@
 	margin: 0 auto;
 	font-size: 30px;
 	text-align: center;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 	line-height: 30px;
-	color: #ed145b;
+	color: #fff;
 
 	p {
 		margin-bottom: 5px;
 	}
 	
-	.ion-arrow-down-c {
-		font-size: 45px;
-		color: #ed145b;
+	 .ion-arrow-down-c {
+	 	font-size: 45px;
+	 	color: #fff;
+	 	margin-top: 10px;
+	 }
+
+	.pinkish {
+		color: #fff;
+		border-bottom: 2px dotted #fff;
+
+		&:hover {
+			border-bottom: 2px solid #fff;
+		}
 	}
 }
 
@@ -91,15 +168,31 @@
 
 	margin-top: 50px;
 
-	.span2 h1 {
-		text-align: right;
+	.content-username {
+
+		h1 {
+			text-align: right;
+			font-size: 50px;
+		}
+
+		a {
+			color: #333;
+			font-weight: 800;
+
+			&:hover {
+				color: #000;
+				border-bottom: 3px solid #000;
+			}
+		}
+		
 	}
 
-	.span2 .user-facts {
+	.span3 .user-facts {
 		text-align: right;
 		margin-top: 10px;
 
 		p {
+			font-size: 16px;
 			margin: 0;			
 		}	
 
@@ -113,8 +206,9 @@
 
 	textarea {
 		width: 98%;
-		height: 100%;
-		border: 2px solid #000;
+		height: 100%;		
+		border: 1px solid rgba(255, 125, 70, .3);
+		font-size: 100%;
 	}
 
 	.tweet-btn {
@@ -131,12 +225,14 @@
 			width: 100%;
 			background-color: rgba(255, 255, 255, 0);
 			color: #000;
-			border: 2px solid;
+			border: 1px solid rgba(255, 125, 70, .3);
 			height: 100%;
+			font-size: 18px;
 
-			// &:hover {
-			// 	border-color: pink;
-			// }
+			&:hover {
+				background-color: @main-color;
+				border: 1px solid @main-color;
+			}
 		}		
 
 		i {
@@ -147,6 +243,7 @@
 			margin-top: -15px;
 			margin-left: -15px;
 			z-index: -10;
+			color: @main-color;
 		}
 
 	}
@@ -282,6 +379,29 @@
 	font-size: 20px;
 }
 
+.detail-wrap {
+	overflow: hidden;
+
+	p {
+		float: left;
+		margin: 30px 0 0 30px;
+	}
+}
+
+.thumbnail-img {
+	float: left;
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	margin: 15px 0 10px 0;
+	overflow: hidden;
+
+	img {
+		width: 100%;
+	}
+
+}
+
 
 //PROFILE PAGE
 
@@ -299,8 +419,6 @@
 		width: 100%;
 	}
 }
-
-
 
 .profile-posts {
 
@@ -387,6 +505,10 @@ input[type="submit"] {
 }
 
 
+.log-in-text-wrap {
+	text-align: center;
+	margin: 40px 0;
+}
 
 /*=================================================================================================================================== 
  #Footer

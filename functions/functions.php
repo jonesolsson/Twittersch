@@ -237,7 +237,7 @@ if(isset($_POST['content'])) {
 //Formulärhantering för replay posts
 if(isset($_POST['reply'])) {
 
-	$userId  	  = $_SESSION['user_id'];
+	@$userId  	  = $_SESSION['user_id'];
 	$content   	  = $_POST['reply'];
 	$replyId 	  = $_POST['reply_id'];
 	$answerToName = $_POST['answer_to_name'];

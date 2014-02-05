@@ -149,7 +149,7 @@ ol {
   margin-bottom: 21px;
 }
 a {
-  color: #000000;
+  color: #ff7d46;
   -webkit-transition: all 0.2s ease-out 0s;
   -moz-transition: all 0.2s ease-out 0s;
   -o-transition: all 0.2s ease-out 0s;
@@ -158,7 +158,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #000000;
+  color: #f84a00;
 }
 hr {
   border: none;
@@ -224,79 +224,147 @@ b {
  #Header
 ======================================================================================================================================*/
 .nav {
-  padding: 20px;
+  background-color: #ff7d46;
 }
-.nav ul {
+.nav .nav-wrap {
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.nav .profile-nav {
+  float: left;
+  margin: 0;
+}
+.nav .main-nav {
   float: right;
+  margin: 0;
 }
 .nav ul li {
   display: inline;
+  padding: 0 0 0 25px;
 }
 .nav a {
-  padding: 0 0 0 10px;
+  color: #fff;
+  font-size: 18px;
+}
+.nav a:hover {
+  padding-bottom: 12px;
+  border-bottom: 3px solid #fff;
+}
+.nav i {
+  padding-right: 4px;
 }
 /*=================================================================================================================================== 
  #Content
 ======================================================================================================================================*/
 .index-wrap {
-  margin-top: 250px;
+  width: 100%;
+  background-color: #ff7d46;
 }
-.login-wrap form,
-.register-wrap form {
-  width: 80%;
-  margin: 0 auto;
-  font-size: 18px;
+.login-wrap-row {
+  margin-top: 200px;
 }
-.login-wrap input[type="text"],
+.register-wrap-row {
+  margin-top: 30px;
+}
+.register-wrap input[type="submit"] {
+  width: 100%;
+  padding: 15px 0;
+  color: #fff;
+  background-color: #ff7d46;
+  border: none;
+  font-size: 16px;
+}
+.register-wrap input[type="submit"]:hover {
+  background-color: #fff;
+  color: #ff7d46;
+  border: 1px solid #ff7d46;
+}
 .register-wrap input[type="text"],
-.login-wrap input[type="password"],
 .register-wrap input[type="password"],
-.login-wrap input[type="email"],
 .register-wrap input[type="email"] {
   float: right;
   width: 100%;
   font-size: 100%;
   height: 40px;
   padding: 0 0 0 5px;
-  border: 2px solid;
+  border: 1px solid #ff7d46;
   margin-bottom: 10px;
 }
-.login-wrap input[type="submit"],
-.register-wrap input[type="submit"] {
+.login-wrap input[type="submit"] {
   width: 100%;
   padding: 15px 0;
-  background-color: #000;
-  color: #fff;
-  border: 2px solid #000;
+  background-color: #fff;
+  color: #ff7d46;
+  border: 1px solid;
   font-size: 16px;
+}
+.login-wrap input[type="submit"]:hover {
+  background-color: #ff7d46;
+  color: #fff;
+  border: 1px solid #FFF;
+}
+.login-wrap input[type="text"],
+.login-wrap input[type="password"],
+.login-wrap input[type="email"] {
+  float: right;
+  width: 100%;
+  font-size: 100%;
+  height: 40px;
+  padding: 0 0 0 5px;
+  border: 1px solid #fff;
+  margin-bottom: 10px;
+}
+.login-wrap form,
+.register-wrap form {
+  width: 70%;
+  margin: 0 auto;
+  font-size: 18px;
 }
 .form-divide {
   width: 25%;
   margin: 0 auto;
   font-size: 30px;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   line-height: 30px;
-  color: #ed145b;
+  color: #fff;
 }
 .form-divide p {
   margin-bottom: 5px;
 }
 .form-divide .ion-arrow-down-c {
   font-size: 45px;
-  color: #ed145b;
+  color: #fff;
+  margin-top: 10px;
+}
+.form-divide .pinkish {
+  color: #fff;
+  border-bottom: 2px dotted #fff;
+}
+.form-divide .pinkish:hover {
+  border-bottom: 2px solid #fff;
 }
 .tweet-form-wrap {
   margin-top: 50px;
 }
-.tweet-form-wrap .span2 h1 {
+.tweet-form-wrap .content-username h1 {
   text-align: right;
+  font-size: 50px;
 }
-.tweet-form-wrap .span2 .user-facts {
+.tweet-form-wrap .content-username a {
+  color: #333;
+  font-weight: 800;
+}
+.tweet-form-wrap .content-username a:hover {
+  color: #000;
+  border-bottom: 3px solid #000;
+}
+.tweet-form-wrap .span3 .user-facts {
   text-align: right;
   margin-top: 10px;
 }
-.tweet-form-wrap .span2 .user-facts p {
+.tweet-form-wrap .span3 .user-facts p {
+  font-size: 16px;
   margin: 0;
 }
 .tweet-form-wrap .tweet-form {
@@ -307,7 +375,8 @@ b {
 .tweet-form-wrap textarea {
   width: 98%;
   height: 100%;
-  border: 2px solid #000;
+  border: 1px solid rgba(255, 125, 70, 0.3);
+  font-size: 100%;
 }
 .tweet-form-wrap .tweet-btn {
   margin: 0;
@@ -322,8 +391,13 @@ b {
   width: 100%;
   background-color: rgba(255, 255, 255, 0);
   color: #000;
-  border: 2px solid;
+  border: 1px solid rgba(255, 125, 70, 0.3);
   height: 100%;
+  font-size: 18px;
+}
+.tweet-form-wrap .tweet-btn input:hover {
+  background-color: #ff7d46;
+  border: 1px solid #ff7d46;
 }
 .tweet-form-wrap .tweet-btn i {
   position: absolute;
@@ -333,6 +407,7 @@ b {
   margin-top: -15px;
   margin-left: -15px;
   z-index: -10;
+  color: #ff7d46;
 }
 .feed {
   margin-top: 90px;
@@ -432,6 +507,24 @@ b {
   text-align: right;
   font-size: 20px;
 }
+.detail-wrap {
+  overflow: hidden;
+}
+.detail-wrap p {
+  float: left;
+  margin: 30px 0 0 30px;
+}
+.thumbnail-img {
+  float: left;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 15px 0 10px 0;
+  overflow: hidden;
+}
+.thumbnail-img img {
+  width: 100%;
+}
 .profile-press .user-press {
   text-align: right;
 }
@@ -502,6 +595,10 @@ b {
 i,
 input[type="submit"] {
   cursor: pointer;
+}
+.log-in-text-wrap {
+  text-align: center;
+  margin: 40px 0;
 }
 /*=================================================================================================================================== 
  #Footer
