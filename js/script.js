@@ -132,7 +132,20 @@ $( document ).ready(function() {
 	});
 
 
+	//MENY
 
+	
+
+	$('.mobile-nav-btn').on('click', function(){
+		mobWrap = $('.mobile-nav-wrap');
+		mobNav = $('.mobile-nav');
+
+
+		$(mobWrap).fadeToggle();
+		$(mobNav).toggleClass('fade-color');
+		$('.mobile-nav-btn').toggleClass('btn-color');
+
+	});
 
 
 

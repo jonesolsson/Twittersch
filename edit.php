@@ -11,7 +11,7 @@
 
 <div class="container">
 
-	<div class="row-fluid headline">
+<!-- 	<div class="row-fluid headline">
 		
 		<div class="span3"></div>
 
@@ -21,7 +21,7 @@
 
 		<div class="span3"></div>	
 
-	</div>
+	</div> -->
 
 
 	<div class="row-fluid edit">	

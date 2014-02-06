@@ -6,6 +6,19 @@
 
 	<div class="container index-wrap">	
 
+		<div class="row-fluid logo-wrap">
+		
+			<div class="span4"></div>
+
+			<div class="span4">
+				<h1>Twittershh...</h1>
+				<p>share your whispers</p>
+			</div>
+
+			<div class="span4"></div>
+
+		</div>
+
 		<div class="row-fluid login-wrap-row">
 			
 			<div class="span4"></div>
@@ -13,12 +26,12 @@
 			<div class="span4 login-wrap">
 				<form action="index.php" method="POST">
 					<label for="user"></label>
-					<input type="text" name="user" placeholder="E-post"><br>
+					<input type="email" name="user" placeholder="E-post">
 
 					<label for="password"></label>
-					<input type="password" name="password" placeholder="Lösenord"><br>
+					<input type="password" name="password" placeholder="Lösenord">
 					
-					<input type="submit" value="Logga in"><br><br>
+					<input type="submit" value="Logga in">
 				</form>
 			</div>	
 
@@ -30,7 +43,7 @@
 
 		</div>
 
-		<div class="row-fluid">
+		<div class="row-fluid login-middle-section">
 
 			<div class="span4"></div>
 			
@@ -53,9 +66,9 @@
 			
 			<div class="span4 register-wrap">
 				<form action="index.php" method="POST">
-					<input type="text" name="create-username" placeholder="Användarnamn"><br>
-					<input type="email" name="create-email" placeholder="E-post"><br>
-					<input type="password" name="create-password" placeholder="Lösenord"><br>
+					<input type="text" name="create-username" placeholder="Användarnamn">
+					<input type="email" name="create-email" placeholder="E-post">
+					<input type="password" name="create-password" placeholder="Lösenord">
 					<input type="submit" value="Registrera">
 				</form>
 
@@ -68,7 +81,7 @@
 				<?php
 
 					foreach ($errors as $error) {
-						print $error . '<br>';
+						print '<p class="error">' . $error . '</p>';
 					}
 
 				?>	

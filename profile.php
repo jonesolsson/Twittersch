@@ -88,7 +88,7 @@
 						$sanUsername 	= sanitize($username);
 						$sanAswerName	= sanitize($answerToNames);     
 
-						print "<a href='profile.php?user=$sanUsername' class='sender'>" . sanitize($username) . '</a><br>';
+						print "<a href='profile.php?user=$sanUsername' class='sender'>" . sanitize($username) . '</a>';
 						if($answerToNames != '') {
 							print "<p><a href='profile.php?user=$sanAswerName'>" . '@' . sanitize($answerToNames) . '</a> ' . linkToAnchor($post['content']) . '</p>';
 							// print "<a href='#' class=''>" . 'Detaljer' . "</a>";

@@ -271,8 +271,28 @@ body#edit a#editLink {
   width: 100%;
   background-color: #ff7d46;
 }
+.index-wrap .logo-wrap {
+  text-align: center;
+  margin: 50px 0;
+}
+.index-wrap .logo-wrap h1 {
+  font-family: 'Over the Rainbow', serif;
+  font-size: 52px;
+  color: #fff;
+  font-weight: bold;
+}
+.index-wrap .logo-wrap p {
+  color: #fff;
+  font-size: 15px;
+  float: right;
+  margin: 0 40px 0 0;
+  font-style: italic;
+}
+.index-wrap .login-middle-section {
+  margin-top: 20px;
+}
 .login-wrap-row {
-  margin-top: 200px;
+  margin-top: 0;
 }
 .register-wrap-row {
   margin-top: 30px;
@@ -374,8 +394,10 @@ body#edit a#editLink {
 .tweet-form-wrap {
   margin-top: 50px;
 }
-.tweet-form-wrap .content-username h1 {
+.tweet-form-wrap .content-username {
   text-align: right;
+}
+.tweet-form-wrap .content-username h1 {
   font-size: 35px;
 }
 .tweet-form-wrap .content-username a {
@@ -387,7 +409,6 @@ body#edit a#editLink {
   border-bottom: 3px solid #000;
 }
 .tweet-form-wrap .span3 .user-facts {
-  text-align: right;
   margin-top: 10px;
 }
 .tweet-form-wrap .span3 .user-facts p {
@@ -679,6 +700,7 @@ body#edit a#editLink {
   margin-top: 50px;
 }
 .edit-form-wrap {
+  overflow: hidden;
   font-size: 18px;
 }
 .edit-form-wrap .change-pic {
@@ -736,13 +758,19 @@ body#edit a#editLink {
   width: 55%;
   border: 1px solid #ff7d46;
   padding: 10px 0;
-  color: #ff7d46;
-  background-color: #fff;
+  /*		background-color: #fff;
+		color: @main-color;*/
+
+  background-color: #ff7d46;
+  color: #fff;
 }
 .edit-form-wrap input[type="submit"]:hover {
   transition: background-color 0.2s;
-  background-color: #ff7d46;
-  color: #fff;
+  /*			background-color: @main-color;
+			color: #fff;*/
+
+  background-color: #fff;
+  color: #ff7d46;
 }
 .edit-form-wrap .password-form {
   margin-top: 80px;
@@ -781,7 +809,148 @@ input[type="submit"] {
 }
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
-  
+  .nav {
+    display: none;
+  }
+  .nav-btn-wrap {
+    padding: 5px;
+  }
+  .mobile-nav {
+    display: block;
+  }
+  .mobile-nav .mobile-nav-btn {
+    color: #ff7d46;
+    float: right;
+    font-size: 30px;
+  }
+  .mobile-nav .btn-color {
+    color: #fff;
+    transition: color .9s;
+  }
+  .mobile-nav .mobile-nav-wrap {
+    background-color: #ff7d46;
+    position: absolute;
+    z-index: 999;
+  }
+  .mobile-nav .mobile-nav-wrap ul {
+    margin: 0;
+    padding: 0 5px;
+  }
+  .mobile-nav .mobile-nav-wrap ul i {
+    margin-right: 5px;
+  }
+  .mobile-nav .mobile-nav-wrap ul li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 10px 0;
+  }
+  .mobile-nav .mobile-nav-wrap ul li:last-child {
+    border-bottom: none;
+  }
+  .mobile-nav .mobile-nav-wrap a {
+    color: #fff;
+  }
+  .index-wrap .logo-wrap {
+    margin: 30px 0;
+    padding: 0 10px;
+  }
+  .index-wrap .logo-wrap h1 {
+    font-size: 44px;
+  }
+  .row-fluid .span4 {
+    min-height: 0;
+  }
+  #home .container {
+    padding: 0 5px;
+  }
+  .tweet-form-wrap {
+    margin-top: 30px;
+  }
+  .tweet-form-wrap .content-username {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .tweet-form-wrap .tweet-form textarea {
+    width: 100%;
+  }
+  .tweet-form-wrap .tweet-btn {
+    margin-top: 14px;
+  }
+  .tweet-form-wrap .tweet-btn input {
+    background-color: #ff7d46;
+  }
+  .tweet-form-wrap .tweet-btn i {
+    color: #fff;
+    z-index: 1;
+  }
+  .tweet-form-wrap .span3 {
+    min-height: 0;
+  }
+  .feed {
+    margin-top: 30px;
+  }
+  .feed .span3 {
+    min-height: 0;
+  }
+  .detail-wrap p {
+    margin: 30px 0 0 10px;
+  }
+  #profile .container {
+    padding: 0 5px;
+  }
+  .profile-press {
+    margin-top: 30px;
+  }
+  .profile-press .span3 {
+    min-height: 0;
+  }
+  .profile-press .user-press {
+    text-align: center;
+  }
+  .profile-press .profile {
+    margin-top: 0;
+  }
+  .profile-press .profile .profile-pic {
+    width: 100%;
+    margin: 0;
+  }
+  #edit .container {
+    padding: 0 5px;
+  }
+  .edit {
+    margin-top: 30px;
+  }
+  .edit .span3 {
+    min-height: 0;
+  }
+  .edit .edit-form-wrap .password-form {
+    margin-top: 60px;
+  }
+  .edit .edit-form-wrap form {
+    width: 100%;
+  }
+  .edit .edit-form-wrap .upload-picture input {
+    width: 100%;
+  }
+  .edit .edit-form-wrap .profile-pic {
+    width: 100%;
+  }
+  .edit .edit-form-wrap .profile-pic img {
+    width: 60%;
+  }
+  .edit .edit-form-wrap .input-wrap label,
+  .edit .edit-form-wrap input {
+    width: 100%;
+  }
+  .edit .edit-form-wrap .input-wrap label {
+    margin-bottom: 3px;
+  }
+  .edit .edit-form-wrap .input-wrap input {
+    margin-bottom: 15px;
+  }
+  .fade-color {
+    background-color: #ff7d46;
+    transition: background-color 0.9s;
+  }
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 @media only screen and (min-width: 480px) and (max-width: 767px) {

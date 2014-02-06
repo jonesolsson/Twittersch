@@ -20,3 +20,20 @@
 	<div class="span1"></div>
 
 </div>
+
+<!-- Nav for smaller screens -->
+<div class="row-fluid mobile-nav">
+	<div class="row-fluid nav-btn-wrap">
+		<i class="ion-navicon mobile-nav-btn"></i>
+	</div>
+
+	<div class="span12 mobile-nav-wrap hide">
+		<ul>
+			<li><a href="profile.php?user=<?= $username ?>"><i class="ion-person"></i>Profil</a></li>
+			<li><a href="content.php"><i class="ion-home"></i>Feed</a></li>
+			<li><a href="edit.php"><i class="ion-edit"></i>Redigera</a></li>
+			<li><a href="logout.php"><i class="ion-log-out"></i>Logge Ut</a></li>
+		</ul>
+	</div>
+</div>
+
