@@ -228,6 +228,9 @@ textarea:focus {
 /*=================================================================================================================================== 
  #Header
 ======================================================================================================================================*/
+.mobile-nav {
+  display: none;
+}
 body#profile a#profileLink,
 body#home a#homeLink,
 body#edit a#editLink {
@@ -281,6 +284,10 @@ body#edit a#editLink {
   color: #fff;
   font-weight: bold;
 }
+.index-wrap .logo-wrap .slogan {
+  position: absolute;
+  left: 50%;
+}
 .index-wrap .logo-wrap p {
   color: #fff;
   font-size: 15px;
@@ -292,7 +299,7 @@ body#edit a#editLink {
   margin-top: 20px;
 }
 .login-wrap-row {
-  margin-top: 0;
+  margin-top: 60px;
 }
 .register-wrap-row {
   margin-top: 30px;
@@ -304,6 +311,7 @@ body#edit a#editLink {
   background-color: #ff7d46;
   border: 1px solid #ff7d46;
   font-size: 16px;
+  -webkit-appearance: none;
 }
 .register-wrap input[type="submit"]:hover {
   transition: background-color 0.2s;
@@ -321,6 +329,7 @@ body#edit a#editLink {
   padding: 0 0 0 5px;
   border: 1px solid #ff7d46;
   margin-bottom: 10px;
+  -webkit-appearance: none;
 }
 .login-wrap input[type="submit"] {
   width: 100%;
@@ -332,6 +341,7 @@ body#edit a#editLink {
 
   border: 1px solid;
   font-size: 16px;
+  -webkit-appearance: none;
 }
 .login-wrap input[type="submit"]:hover {
   transition: background-color 0.2s;
@@ -355,6 +365,7 @@ body#edit a#editLink {
   padding: 0 0 0 5px;
   border: 1px solid #fff;
   margin-bottom: 10px;
+  -webkit-appearance: none;
 }
 .login-wrap input[type="text"]:focus,
 .login-wrap input[type="password"]:focus,
@@ -415,6 +426,9 @@ body#edit a#editLink {
   font-size: 14px;
   margin: 0;
 }
+.tweet-form-wrap .span3 .user-facts .whisp-count {
+  font-weight: 800;
+}
 .tweet-form-wrap .tweet-form {
   width: 100%;
   margin: 0;
@@ -431,6 +445,7 @@ body#edit a#editLink {
   position: relative;
   height: 60px;
   margin-top: 60px;
+  -webkit-appearance: none;
 }
 .tweet-form-wrap .tweet-btn:hover {
   color: pink;
@@ -442,6 +457,7 @@ body#edit a#editLink {
   border: 1px solid rgba(255, 125, 70, 0.3);
   height: 100%;
   font-size: 18px;
+  -webkit-appearance: none;
 }
 .tweet-form-wrap .tweet-btn input:hover {
   transition: background-color 0.2s;
@@ -531,6 +547,7 @@ body#edit a#editLink {
   float: left;
   margin-right: 5px;
   border: 1px solid #ccc;
+  -webkit-appearance: none;
 }
 .post .reply-form textarea:focus {
   box-shadow: 0 0 5px #ff7d46;
@@ -541,6 +558,7 @@ body#edit a#editLink {
   height: 50px;
   border: 1px solid #ccc;
   background-color: #fff;
+  -webkit-appearance: none;
 }
 .post .reply-form input[type="submit"]:hover {
   transition: background-color 0.2s;
@@ -596,6 +614,7 @@ body#edit a#editLink {
   height: 50px;
   border: 1px solid #ccc;
   background-color: #fff;
+  -webkit-appearance: none;
 }
 .conversation-modal input[type="submit"]:hover {
   transition: background-color 0.2s;
@@ -650,6 +669,13 @@ body#edit a#editLink {
   text-align: right;
   font-size: 20px;
 }
+.pagecount a {
+  padding-left: 5px;
+  color: rgba(255, 125, 70, 0.7);
+}
+.pagecount a:hover {
+  color: #ff7d46;
+}
 .detail-wrap {
   overflow: hidden;
 }
@@ -667,6 +693,16 @@ body#edit a#editLink {
 }
 .thumbnail-img img {
   width: 100%;
+}
+.date {
+  font-style: italic;
+}
+.error-wrap-feed {
+  font-size: 16px;
+  font-weight: 800;
+  color: #993333;
+  padding: 5px;
+  text-align: center;
 }
 .profile-press {
   margin-top: 50px;
@@ -699,6 +735,11 @@ body#edit a#editLink {
 .edit {
   margin-top: 50px;
 }
+.edit .error-wrap {
+  float: left;
+  width: 95%;
+  text-align: right;
+}
 .edit-form-wrap {
   overflow: hidden;
   font-size: 18px;
@@ -711,6 +752,7 @@ body#edit a#editLink {
 .edit-form-wrap input[type="file"] {
   float: left;
   width: 45%;
+  -webkit-appearance: none;
 }
 .edit-form-wrap .profile-pic {
   width: 55%;
@@ -739,6 +781,7 @@ body#edit a#editLink {
   font-size: 100%;
   padding-left: 5px;
   border: 1px solid #ccc;
+  -webkit-appearance: none;
 }
 .edit-form-wrap label {
   float: left;
@@ -752,12 +795,14 @@ body#edit a#editLink {
   width: 100%;
   border: 1px solid #ccc;
   padding: 0 5px;
+  -webkit-appearance: none;
 }
 .edit-form-wrap input[type="submit"] {
   float: right;
   width: 55%;
   border: 1px solid #ff7d46;
   padding: 10px 0;
+  -webkit-appearance: none;
   /*		background-color: #fff;
 		color: @main-color;*/
 
@@ -773,11 +818,13 @@ body#edit a#editLink {
   color: #ff7d46;
 }
 .edit-form-wrap .password-form {
-  margin-top: 80px;
+  padding: 3px 0;
+  overflow: hidden;
 }
 i,
 input[type="submit"] {
   cursor: pointer;
+  -webkit-appearance: none;
 }
 .log-in-text-wrap {
   text-align: center;
@@ -789,6 +836,23 @@ input[type="submit"] {
 }
 .log-in-text-wrap a:hover {
   color: #ff7d46;
+}
+.error-wrap {
+  font-size: 16px;
+  font-weight: 800;
+  color: #000;
+  padding: 5px;
+  text-align: center;
+}
+.error-wrap .success {
+  color: #007d15;
+}
+.reg-success {
+  font-size: 16px;
+  font-weight: 800;
+  color: #007d15;
+  padding: 5px;
+  text-align: center;
 }
 /*=================================================================================================================================== 
  #Footer
@@ -818,7 +882,18 @@ input[type="submit"] {
   .mobile-nav {
     display: block;
   }
+  .mobile-nav .logo {
+    position: absolute;
+    left: 50%;
+    margin-left: -49px;
+    margin-top: 3px;
+    color: #ff7d46;
+    font-family: 'Over the Rainbow', serif;
+    font-weight: 800;
+    font-size: 16px;
+  }
   .mobile-nav .mobile-nav-btn {
+    display: block;
     color: #ff7d46;
     float: right;
     font-size: 30px;
@@ -842,6 +917,7 @@ input[type="submit"] {
   .mobile-nav .mobile-nav-wrap ul li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
     padding: 10px 0;
+    cursor: pointer;
   }
   .mobile-nav .mobile-nav-wrap ul li:last-child {
     border-bottom: none;
@@ -951,6 +1027,14 @@ input[type="submit"] {
     background-color: #ff7d46;
     transition: background-color 0.9s;
   }
+  .error-wrap-feed {
+    font-size: 16px;
+    font-weight: 800;
+    color: #993333;
+    padding: 5px;
+    position: absolute;
+    top: 31%;
+  }
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -958,7 +1042,9 @@ input[type="submit"] {
 }
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
-  
+  .index-wrap .logo-wrap .slogan {
+    left: 40%;
+  }
 }
 /*=================================================================================================================================== 
  #Retina displays

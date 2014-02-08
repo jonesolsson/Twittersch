@@ -70,11 +70,17 @@
 		</div>
 
 		<div class="row-fluid feed">
-
+			
 			<div class="span3"></div>
 
 			<div class="span6 posts-wrap">
-
+				<div class="error-wrap-feed">
+					<?php
+					foreach($errors as $error) {
+						print $error;
+					}
+					?>
+				</div>
 				<?php $posts = getPostsToProfile(($start -1) * $view); foreach ($posts as $post) : ?>
 				<div class="post">
 					

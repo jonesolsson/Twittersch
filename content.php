@@ -36,14 +36,14 @@ require 'head.php';
 				
 				<div class="user-facts">						
 					<p>
-						Har gjort <?= countUsersPosts($username); ?> viskningar
+						Har gjort <span class="whisp-count"><?= countUsersPosts($username); ?></span> viskningar
 					</p>
 
 					<p>
 						<?php 
 
 						foreach (getLatestPostFromUser($username) as $latestPost) {
-							print 'den senaste gjordes ' . date('j/M-Y', strtotime($latestPost['posted']));							
+							print 'den senaste gjordes <span class="date">' . date('j/M-Y', strtotime($latestPost['posted'])) . '</span>';							
 						}
 
 
@@ -59,13 +59,13 @@ require 'head.php';
 				<form action="content.php" method="POST" class="tweet-form">
 					<textarea name="content" placeholder="Dela en viskning..."></textarea>
 
-					<div class="errors">
+					<div class="error-wrap-feed">
 						<?php
 						foreach($errors as $error) {
 							print $error;
 						}
 						?>
-				</div>
+					</div>
 
 			</div>
 
@@ -206,7 +206,7 @@ require 'head.php';
 							<img src="<?= sanitize($post['image_url']); ?>">
 						</div>
 					
-						<p><?= $post['username'] . ' viskade detta den ' . date('j/M-Y', strtotime($post['posted'])); ?></p>
+						<p><?= $post['username'] . ' viskade detta den <span class="date">' . date('j/M-Y', strtotime($post['posted'])) . '</span>'; ?></p>
 
 						</div>
 	
@@ -248,6 +248,8 @@ require 'head.php';
 	    <div class="overlay"></div>
 
 	</div>
+
+	<?php require 'footer.php'; ?>
 	
 <!-- JavaScript -->
 <script src="js/jquery-1.10.1.min.js"></script>

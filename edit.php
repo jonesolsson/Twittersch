@@ -86,8 +86,8 @@
 					print '<p>' . $error . '</p>';
 				} 
 
-				print $pressErrors;
-				print $pressSuccess;
+				print '<p>' . $pressErrors . '</p>';
+				print '<p class="success">' . $pressSuccess . '</p>';
 
 				?>
 
@@ -118,8 +118,8 @@
 				
 			<?php
 
-				print $passErrors;
-				print $passSuccess;
+				print '<p>' . $passErrors . '</p';
+				print '<p class="success">' . $passSuccess . '</p>';
 
 			?>
 

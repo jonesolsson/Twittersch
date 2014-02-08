@@ -133,9 +133,6 @@ $( document ).ready(function() {
 
 
 	//MENY
-
-	
-
 	$('.mobile-nav-btn').on('click', function(){
 		mobWrap = $('.mobile-nav-wrap');
 		mobNav = $('.mobile-nav');
@@ -144,10 +141,22 @@ $( document ).ready(function() {
 		$(mobWrap).fadeToggle();
 		$(mobNav).toggleClass('fade-color');
 		$('.mobile-nav-btn').toggleClass('btn-color');
+		$('.logo').toggleClass('btn-color');
 
 	});
 
+	$('.mobile-nav-wrap').on('click', function(event){
+		t = event.target;
 
+		if(t.tagName == ('LI')) {			
+			link = $(t).find('a');
+			href = $(link).attr('href');
+			$(location).attr('href', href);
+		}
+
+	});	
+
+	
 
 
 });

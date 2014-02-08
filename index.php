@@ -12,7 +12,9 @@
 
 			<div class="span4">
 				<h1>Twittershh...</h1>
-				<p>share your whispers</p>
+				<div class="slogan">
+					<p>share your whispers</p>	
+				</div>				
 			</div>
 
 			<div class="span4"></div>
@@ -33,12 +35,14 @@
 					
 					<input type="submit" value="Logga in">
 				</form>
+
+				<div class="error-wrap">
+					<?= $error ?>
+				</div>
+
 			</div>	
 
-			<div class="span4 error-wrap">
-				
-				<?= $error ?>
-
+			<div class="span4">	
 			</div>
 
 		</div>
@@ -71,13 +75,13 @@
 					<input type="password" name="create-password" placeholder="Lösenord">
 					<input type="submit" value="Registrera">
 				</form>
+				
+				<div class="reg-success">
+					<?= $succes; ?>					
+				</div>
 
-				<?= $succes; ?>
-
-			</div>
-
-			<div class="span4 error-wrap">
-			
+				<div class="error-wrap">
+					
 				<?php
 
 					foreach ($errors as $error) {
@@ -85,7 +89,13 @@
 					}
 
 				?>	
-			
+
+				</div>	
+
+
+			</div>
+
+			<div class="span4">		
 			</div>	
 
 

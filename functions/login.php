@@ -92,7 +92,9 @@ function validateRegister($username, $mail, $password) {
 
 	if($password == '') {
 		$errors[] = 'Lösenord saknas'; 
-	}
+	} elseif(strlen($password) < 6) {
+		$errors[] = 'Lösenordet måste vara minst 6 tecken långt';
+	}	
 
 	return $errors;
 
@@ -157,9 +159,9 @@ if(isset($_POST['create-username']) && isset($_POST['create-email']) && isset($_
 	$isUsernameTaken = isUsernameTaken($createUsername);
 
 	if(count($doesUserExist) != 0) {
-		print 'Den här e-posten har redan ett registrerat konto';
+		$errors[] =  'Den här e-posten har redan ett registrerat konto';
 	} elseif(count($isUsernameTaken) != 0) {
-		print 'Användarnamnet är redan taget';
+		$errors[] = 'Användarnamnet är redan taget';;
  	} else {
 
 		$errors = validateRegister($createUsername, $createEmail, $createPassword);
@@ -174,10 +176,12 @@ if(isset($_POST['create-username']) && isset($_POST['create-email']) && isset($_
 	}
 
 } else {
-
 	$errors = [];
-
 }
+
+
+
+
 
 
 

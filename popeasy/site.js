@@ -12,7 +12,7 @@ $(document).ready(function(){
         openOnLoad: false,              // open modal on page load | true or false | default=false
         docClose: true,                 // click document to close | true or false | default=true    
         closeByEscape: true,            // close modal by escape key | true or false | default=true
-        moveOnScroll: false,             // move modal when window is scrolled | true or false | default=false
+        moveOnScroll: true,             // move modal when window is scrolled | true or false | default=false
         resizeWindow: true,             // move modal when window is resized | true or false | default=false
         video: 'http://player.vimeo.com/video/2355334?color=eb5a3d',    // enter the url of the video
         videoClass:'video',             // class of video element(s)

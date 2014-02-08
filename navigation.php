@@ -24,6 +24,7 @@
 <!-- Nav for smaller screens -->
 <div class="row-fluid mobile-nav">
 	<div class="row-fluid nav-btn-wrap">
+		<p class="logo">Twittershh...</p>
 		<i class="ion-navicon mobile-nav-btn"></i>
 	</div>
 
@@ -36,4 +37,3 @@
 		</ul>
 	</div>
 </div>
-
