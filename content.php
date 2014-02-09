@@ -229,12 +229,29 @@ require 'head.php';
 					<?php endforeach; ?>
 
 				<div class="pagecount">
-
+					
+					<div class="page-num">
 					<?php
 
 						printPageLinks($pages, $start, '');	
 			    		
-				    ?>
+				    ?>						
+					</div>
+
+					<div class="next-btn">	
+					<?php	
+
+						if( ! empty($_GET['page'])) {
+							$pageNum = $_GET['page'] + 1;
+							print "<a href='content.php?page=$pageNum' class='active'>" . 'Nästa' . '</a>';
+						} else {
+							if(countAllPosts() > 10) {
+								print "<a href='content.php?page=2' class='active'>" . 'Nästa' . '</a>';
+							}
+						}
+
+					?>
+					</div>
 
 			    </div>
 

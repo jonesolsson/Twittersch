@@ -666,14 +666,25 @@ body#edit a#editLink {
 .pagecount {
   width: 100%;
   padding: 15px 0;
-  text-align: right;
   font-size: 20px;
 }
-.pagecount a {
+.pagecount .page-num {
+  float: left;
+}
+.pagecount .next-btn {
+  float: right;
+  color: rgba(255, 125, 70, 0.7);
+}
+.pagecount .inactive {
+  padding-left: 5px;
+  color: rgba(0, 0, 0, 0.2);
+  cursor: default;
+}
+.pagecount .active {
   padding-left: 5px;
   color: rgba(255, 125, 70, 0.7);
 }
-.pagecount a:hover {
+.pagecount .active:hover {
   color: #ff7d46;
 }
 .detail-wrap {
@@ -857,6 +868,17 @@ input[type="submit"] {
 /*=================================================================================================================================== 
  #Footer
 ======================================================================================================================================*/
+.footer-wrap {
+  padding: 20px 0;
+  margin-top: 40px;
+}
+.footer-wrap .footer {
+  text-align: center;
+}
+.footer-wrap .foot-logo {
+  font-family: 'Over the Rainbow', serif;
+  font-weight: 800;
+}
 /*=================================================================================================================================== 
  #Import Forms & buttons
 ======================================================================================================================================*/

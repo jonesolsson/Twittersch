@@ -561,15 +561,28 @@ body#edit a#editLink {
 .pagecount {
 	width: 100%;
 	padding: 15px 0;
-	text-align: right;
 	font-size: 20px;
-	a {
+	.page-num {
+		float: left;
+	}
+	.next-btn {
+		float: right;
+		color: rgba(255, 125, 70, .7);
+
+	}
+	.inactive {
+		padding-left: 5px;
+		color: rgba(0, 0, 0, .2);
+		cursor: default;		
+	}	
+	.active {
 		padding-left: 5px;
 		color: rgba(255, 125, 70, .7);
 		&:hover {
 			color: @main-color;
 		}
 	}
+
 }
 
 .detail-wrap {
@@ -805,6 +818,10 @@ input[type="submit"] {
 	margin-top: 40px;
 	.footer {
 		text-align: center;
+	}
+	.foot-logo{
+		font-family: 'Over the Rainbow', serif;
+		font-weight: 800; 
 	}
 }
 

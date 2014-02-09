@@ -536,7 +536,6 @@ function countUsersPosts($user) {
 //Kolla om man bifinner sig på "content" eller "profile"
 if( ! empty($_GET['user'])) {
 	$numRows = countUsersPosts($_GET['user']);
-	//print $_GET['user'];  
 } else {
 	$numRows = countAllPosts();
 }
@@ -564,9 +563,9 @@ function printPageLinks($pages, $start, $username) {
 		if($i == $start) {
 			print "<b>$i</b>";
 		} elseif( ! empty($_GET['user'])) {
-			print "<a href='profile.php?user=$username&page=$i'>$i</a>";
+			print "<a href='profile.php?user=$username&page=$i' class='active'>$i</a>";
 		} else {
-			print "<a href='content.php?page=$i'>$i</a>";			
+			print "<a href='content.php?page=$i' class='active'>$i</a>";			
 		}	
 	}
 }

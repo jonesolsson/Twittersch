@@ -226,12 +226,31 @@
 				<?php endforeach; ?>
 
 				<div class="pagecount">
-
+					
+					<div class="page-num">
 					<?php
 						printPageLinks($pages, $start, $_GET['user']);
+				    ?>											
+					</div>
 
-				    ?>
-					
+					<div class="next-btn">
+					<?php
+
+						$user = $_GET['user'];
+
+						if( ! empty($_GET['page'])) {
+							$pageNum = $_GET['page'] + 1;
+							print "<a href='profile.php?user=$user&page=$pageNum' class='active'>" . 'Nästa' . '</a>';
+						} else {
+							if(countUsersPosts($_GET['user']) > 10) {
+								print "<a href='profile.php?user=$user&page=2' class='active'>" . 'Nästa' . '</a>';
+							}
+						}
+					?>						
+
+					</div>
+
+
 				</div>
 
 		    </div>
@@ -244,6 +263,8 @@
 	    <div class="overlay"></div>
 
 	</div>
+
+<?php require 'footer.php'; ?>
 
 <!-- JavaScript -->
 <script src="js/jquery-1.10.1.min.js"></script>

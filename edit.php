@@ -133,6 +133,8 @@
 
 </div>	
 
+<?php require 'footer.php'; ?>
+
 <!-- JavaScript -->
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/script.js"></script>
